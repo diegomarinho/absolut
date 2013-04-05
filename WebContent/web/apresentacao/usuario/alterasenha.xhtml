@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Alterar senha" />
+		</ui:define>
+		<ui:define name="corpo">
+			<rich:spacer height="30"/>
+			<h:outputText value="Alterar senha usuário" styleClass="nomeTela" />
+			<h:form id="formAlteraSenha">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage value="../../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+				
+				<rich:panel header="" style="width:98%">
+					<h:panelGrid columns="2" styleClass="tabela" width="50%">
+						<h:outputText value="Senha atual:" />
+						<h:panelGroup>
+							<h:inputSecret id="senhaAtual" value="#{actPrincipal.dtoAlteraSenha.senhaAtual}" size="20" maxlength="40" styleClass="campoTexto" 
+								required="true" requiredMessage="O campo 'Senha atual' é de prenchimento obrigatório"/>
+							<rich:message for="senhaAtual" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Nova senha:" />
+						<h:panelGroup>
+							<h:inputSecret id="novaSenha" value="#{actPrincipal.dtoAlteraSenha.novaSenha}" size="20" maxlength="40" styleClass="campoTexto"
+								required="true" requiredMessage="O campo 'Nova senha' é de preenchimento obrigatório" />
+							<rich:message for="novaSenha" style="color:red" /> 
+						</h:panelGroup>
+						<h:outputText value="Repita nova senha" />
+						<h:panelGroup>
+							<h:inputSecret id="reNovaSenha" value="#{actPrincipal.dtoAlteraSenha.reNovaSenha}" size="20" maxlength="40" styleClass="campoTexto"
+								required="true" requiredMessage="O campo 'Repita nova senha' é de preenchimento obrigatório" />
+							<rich:message for="reNovaSenha" style="color:red" />
+						</h:panelGroup>
+						<f:facet name="footer">
+							<h:panelGroup>
+								<center>
+									<h:panelGrid columns="2" styleClass="tabelaSemBorda">
+										<h:commandButton value="Alterar" styleClass="botoes" action="#{actPrincipal.alteraSenha}"/>
+										<h:commandButton value="Cancelar" styleClass="botoes" action="principal" />
+									</h:panelGrid>
+								</center>
+							</h:panelGroup>
+						</f:facet>						
+					</h:panelGrid>
+				</rich:panel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="br.absolut.persistencia.fornecedor">
+	<class name="Fornecedor" table="fornecedor">
+		<id name="cod">
+			<generator class="increment" />
+		</id>
+		
+		<property name="cnpj" />
+		<property name="nome" />
+		<property name="telefone" />
+		<property name="endereco"/>
+		<property name="bairro"/>
+		<property name="cidade"/>
+		<property name="estado"/>
+		<property name="cep"/>
+		<property name="agencia"/>
+		<property name="contaCorrente" column="conta_corrente"/>
+		<property name="banco"/>
+		<property name="dtExclusao" column="dt_exclusao" type="java.util.Date" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Consulta usuário" />
+		</ui:define>
+		<ui:define name="corpo">
+			<rich:spacer height="30"/>
+			<h:outputText value="Consultar usuários" styleClass="nomeTela" />
+			<h:form id="formUsuario">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage value="../../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+				
+				<rich:panel header="Usuários cadastrados no sistema" style="width:98%">
+					<rich:dataTable id="usuarios" rows="10"
+						value="#{actConsultaUsuario.listaUsuario}" var="usuario" width="100%"
+						onRowMouseOver="this.style.backgroundColor='#FFF7D6'"
+						onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'">
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+							<h:outputText value="#{usuario.nome}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="login" />
+							</f:facet>
+							<h:outputText value="#{usuario.login}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Tipo acesso" />
+							</f:facet>
+							<h:outputText value="#{usuario.acesso}" />
+						</rich:column>
+						<rich:column>
+							<h:commandLink action="#{actConsultaUsuario.alterar}">
+								<f:setPropertyActionListener value="#{usuario.cod}"
+									target="#{actConsultaUsuario.codUsuario}" />
+								<h:graphicImage value="../../../common/image/imgBotaoAlterar.gif"
+									title="Alterar usuário" />
+							</h:commandLink>
+						</rich:column>
+						<rich:column>
+							<a4j:commandLink  id="cLExcluir">
+								<rich:componentControl for="mpConfirmaExclusao" attachTo="cLExcluir" operation="show" event="onclick" />
+								<f:setPropertyActionListener value="#{usuario.cod}"
+									target="#{actConsultaUsuario.codUsuario}" />
+								<h:graphicImage value="../../../common/image/imgBotaoExcluir.gif"
+									title="Excluir usuário" />
+							</a4j:commandLink>
+						</rich:column>
+						<f:facet name="footer">
+							<rich:datascroller id="scroll" for="usuarios"
+								maxPages="10" align="center"
+								page="#{actConsultaUsuario.scrollerPage}"
+								renderIfSinglePage="false" />
+						</f:facet>
+					</rich:dataTable>
+				</rich:panel>
+				<rich:modalPanel id="mpConfirmaExclusao" autosized="true"
+					moveable="true" width="300">
+					<f:facet name="header">
+						<h:outputText value="Confirmar exclusão" />
+					</f:facet>
+					<center><h:outputText
+						value="Confirma exclusão do usuário?" style="font-weight:bold;" /></center>
+					<br />
+					<center><h:commandButton value="Sim"
+						onclick="javascript: Richfaces.hideModalPanel('mpConfirmaExclusao');" 
+						actionListener="#{actConsultaUsuario.excluir}"
+						action="#{actConsultaUsuario.atualizaResultado}"/>
+					<h:commandButton value="Não"
+						onclick="javascript: Richfaces.hideModalPanel('mpConfirmaExclusao');return false;" /></center>
+				</rich:modalPanel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

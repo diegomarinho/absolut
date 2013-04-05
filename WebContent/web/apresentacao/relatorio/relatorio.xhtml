@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Gerar relatórios" />
+		</ui:define>
+		<ui:define name="corpo">
+			<rich:spacer height="30" />
+			<h:outputText value="Gerar relatórios" styleClass="nomeTela" />
+			<h:form id="formRelatorios">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage
+							value="../../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+				<rich:panel>
+					<f:facet name="header">
+						<h:outputText value="Compra" />
+					</f:facet>
+					<h:panelGrid columns="1" styleClass="tabelaSemBorda">
+						<h:outputLink id="cLinkRelCompraPeriodo"
+							onclick="javascript: Richfaces.showModalPanel('mpRelatorioCompraPorPeriodo'); return false;">
+							<h:panelGrid columns="2">
+								<h:graphicImage value="../../../common/image/imgBotaoAdobe.gif" />
+								<h:outputText value="Por período" />
+							</h:panelGrid>
+						</h:outputLink>
+					</h:panelGrid>
+				</rich:panel>
+				<rich:spacer height="30" />
+				<rich:panel>
+					<f:facet name="header">
+						<h:outputText value="Venda" />
+					</f:facet>
+					<h:panelGrid columns="1" styleClass="tabelaSemBorda">
+						<h:outputLink id="cLinkRelVendaPeriodo"
+							onclick="javascript: Richfaces.showModalPanel('mpRelatorioVendaPorPeriodo'); return false;">
+							<h:panelGrid columns="2">
+								<h:graphicImage value="../../../common/image/imgBotaoAdobe.gif" />
+								<h:outputText value="Por período" />
+							</h:panelGrid>
+						</h:outputLink>
+					</h:panelGrid>
+				</rich:panel>
+				<rich:modalPanel id="mpRelatorioVendaPorPeriodo" autosized="true"
+					moveable="true" width="300">
+					<f:facet name="header">
+						<h:outputText value="Relatório de vendas por período" />
+					</f:facet>
+					<h:panelGrid columns="2" styleClass="tabela">
+						<h:panelGroup>
+							<h:outputText value="Data inicial:" />
+							<rich:spacer width="5" />
+							<rich:calendar value="#{actRelatorio.dtVendaInicial}"
+								datePattern="dd/MM/yyyy" firstWeekDay="0"
+								monthLabels="Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro"
+								weekDayLabels="Dom,Seg,Ter,Qua,Qui,Sex,Sab" inputSize="10" />
+						</h:panelGroup>
+						<h:panelGroup>
+							<h:outputText value="Data final:" />
+							<rich:spacer width="5" />
+							<rich:calendar value="#{actRelatorio.dtVendaFinal}"
+								datePattern="dd/MM/yyyy" firstWeekDay="0"
+								monthLabels="Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro"
+								weekDayLabels="Dom,Seg,Ter,Qua,Qui,Sex,Sab" inputSize="10" />
+						</h:panelGroup>
+					</h:panelGrid>
+					<center>
+						<h:commandButton value="Gerar"
+							onclick="javascript: Richfaces.hideModalPanel('mpRelatorioVendaPorPeriodo');"
+							action="#{actRelatorio.geraRelatorioVendaPorPeriodo}" />
+						<h:commandButton value="Voltar"
+							onclick="javascript: Richfaces.hideModalPanel('mpRelatorioVendaPorPeriodo');return false;" />
+					</center>
+				</rich:modalPanel>
+				<rich:modalPanel id="mpRelatorioCompraPorPeriodo" autosized="true"
+					moveable="true" width="300">
+					<f:facet name="header">
+						<h:outputText value="Relatório de compras por período" />
+					</f:facet>
+					<h:panelGrid columns="2" styleClass="tabela">
+						<h:panelGroup>
+							<h:outputText value="Data inicial:" />
+							<rich:spacer width="5" />
+							<rich:calendar value="#{actRelatorio.dtCompraInicial}"
+								datePattern="dd/MM/yyyy" firstWeekDay="0"
+								monthLabels="Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro"
+								weekDayLabels="Dom,Seg,Ter,Qua,Qui,Sex,Sab" inputSize="10" />
+						</h:panelGroup>
+						<h:panelGroup>
+							<h:outputText value="Data final:" />
+							<rich:spacer width="5" />
+							<rich:calendar value="#{actRelatorio.dtCompraFinal}"
+								datePattern="dd/MM/yyyy" firstWeekDay="0"
+								monthLabels="Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro"
+								weekDayLabels="Dom,Seg,Ter,Qua,Qui,Sex,Sab" inputSize="10" />
+						</h:panelGroup>
+					</h:panelGrid>
+					<center>
+						<h:commandButton value="Gerar"
+							onclick="javascript: Richfaces.hideModalPanel('mpRelatorioCompraPorPeriodo');"
+							action="#{actRelatorio.geraRelatorioCompraPorPeriodo}" />
+						<h:commandButton value="Voltar"
+							onclick="javascript: Richfaces.hideModalPanel('mpRelatorioCompraPorPeriodo');return false;" />
+					</center>
+				</rich:modalPanel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

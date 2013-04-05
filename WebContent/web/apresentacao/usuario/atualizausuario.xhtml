@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="absolut - Atualizar usuário" />
+		</ui:define>
+		<ui:define name="corpo">
+			<rich:spacer height="30"/>
+			<h:outputText value="Cadastrar usuário" styleClass="nomeTela" />
+			<h:form id="formCliente">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage value="../../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+				<rich:panel>
+					<f:facet name="header">
+						<h:outputText value="Dados usuário" />
+					</f:facet>
+					<h:panelGrid columns="2" styleClass="tabelaSemLateral" width="99%">
+						<h:outputText value="Nome:" />
+						<h:panelGroup>
+							<h:inputText id="nome" 
+								value="#{actAtualizaUsuario.dtoIncluiUsuario.nome}" size="80"
+								maxlength="100" styleClass="campoTexto" required="true"
+								requiredMessage="O nome é obrigatório" />
+							<rich:message for="nome" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Login:" />
+						<h:panelGroup>
+							<h:inputText id="login" readonly="#{actAtualizaUsuario.ehAlteracao}"
+								value="#{actAtualizaUsuario.dtoIncluiUsuario.login}" size="20"
+								maxlength="20" styleClass="campoTexto" required="true"
+								requiredMessage="O login é obrigatório" />
+							<rich:message for="login" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Senha:" />
+						<h:panelGroup>
+							<h:inputSecret id="senha" readonly="#{actAtualizaUsuario.ehAlteracao}"
+								value="#{actAtualizaUsuario.dtoIncluiUsuario.senha}" size="20"
+								maxlength="40" styleClass="campoTexto" required="true"
+								requiredMessage="A senha é obrigatória" />
+							<rich:spacer width="50"/>
+							<h:outputText value="Redigite a senha:" />
+							<rich:spacer width="10" />
+							<h:inputSecret id="reSenha" readonly="#{actAtualizaUsuario.ehAlteracao}"
+								value="#{actAtualizaUsuario.dtoIncluiUsuario.reSenha}" size="20"
+								maxlength="40" styleClass="campoTexto" required="true"
+								requiredMessage="A senha é obrigatória" />
+							<rich:message for="senha" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Perfil:" />
+						<h:panelGroup>
+							<h:selectOneMenu styleClass="combo"
+								value="#{actAtualizaUsuario.dtoIncluiUsuario.codigoAcesso}">
+								<f:selectItem itemValue="0" itemLabel="-- Escolha --" />
+								<f:selectItems value="#{actAtualizaUsuario.listaAcesso}" />
+							</h:selectOneMenu>
+						</h:panelGroup>
+						<f:facet name="footer">
+							<h:panelGroup>
+								<center><h:panelGrid columns="2" styleClass="semBorda">
+									<h:commandButton value="Salvar" styleClass="botoes"
+										action="#{actAtualizaUsuario.salvar}"
+										onclick="Richfaces.showModalPanel('mpStatusSubmit');" />
+									<h:commandButton value="Limpar" styleClass="botoes"
+										type="reset" />
+								</h:panelGrid></center>
+							</h:panelGroup>
+						</f:facet>
+					</h:panelGrid>
+				</rich:panel>
+				<h:inputHidden id="codUsuario" value="#{actAtualizaUsuario.dtoIncluiUsuario.cod}" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

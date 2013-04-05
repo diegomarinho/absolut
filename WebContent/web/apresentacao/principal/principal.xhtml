@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - P&#225;gina principal" />
+		</ui:define>
+		<ui:define name="corpo">
+			<rich:spacer height="30" />
+			<h:outputText value="Principal" styleClass="nomeTela" />
+			<h:form id="formPrincipal">
+				<h:panelGrid columns="2" width="98%" styleClass="tabelaSemBorda">
+					<rich:panel header="Produtos com baixo estoque" style="width:80%">
+						<rich:dataTable id="resultadoConsultaProduto" rows="5"
+							value="#{actPrincipal.listaProduto}" var="item" width="100%"
+							onRowMouseOver="this.style.backgroundColor='#FFF7D6'"
+							onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'">
+
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="C&#243;digo barras" />
+								</f:facet>
+								<h:outputText value="#{item.codBarra}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Descri&#231;&#227;o" />
+								</f:facet>
+								<h:outputText value="#{item.descricao}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Quantidade" />
+								</f:facet>
+								<h:outputText value="#{item.saldoAtual}" />
+							</rich:column>
+							<f:facet name="footer">
+								<rich:datascroller id="scroll" for="resultadoConsultaProduto"
+									maxPages="10" align="center"
+									page="#{actPrincipal.scrollerPage}" renderIfSinglePage="false" />
+							</f:facet>
+						</rich:dataTable>
+					</rich:panel>
+					<rich:panel header="Hist&#243;rico de vendas">
+						<rich:dataTable id="historicoVendas" rows="5"
+							value="#{actPrincipal.listaHistVenda}" var="item" width="100%"
+							onRowMouseOver="this.style.backgroundColor='#FFF7D6'"
+							onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'">
+
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Data" />
+								</f:facet>
+								<h:outputText value="#{item.data}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Quantidade" />
+								</f:facet>
+								<h:outputText value="#{item.quantidade}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Total" />
+								</f:facet>
+								<h:outputText value="#{item.total}" />
+							</rich:column>
+						</rich:dataTable>
+					</rich:panel>
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

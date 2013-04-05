@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transational//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transational.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j" lang="pt">
+
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Compra" />
+		</ui:define>
+		<ui:define name="corpo">
+			<rich:spacer height="30"/>
+			<h:outputText value="Nova compra" styleClass="nomeTela" />
+			<h:form id="formCompra">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage value="../../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+				<rich:panel>
+					<h:panelGrid columns="2" styleClass="tabelaSemLateral" width="99%">
+						<h:outputText value="Nota fiscal:" />
+						<h:panelGroup>
+							<h:inputText value="#{actCompra.dtoCompra.notaFiscal}" size="20"
+								maxlength="20" styleClass="campoTexto"
+								onkeydown="validaDigito(event);" />
+							<rich:spacer width="50" />
+							<h:outputText value="Data:" />
+							<rich:spacer width="10" />
+							<rich:calendar value="#{actCompra.dtoCompra.dtCompra}"
+								datePattern="dd/MM/yyyy" firstWeekDay="0"
+								monthLabels="Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro"
+								weekDayLabels="Dom,Seg,Ter,Qua,Qui,Sex,Sab" inputSize="10" />
+						</h:panelGroup>
+						<h:outputText value="Fornecedor:" />
+						<h:panelGroup>
+							<h:selectOneMenu value="#{actCompra.dtoCompra.codFornecedor}">
+								<f:selectItem itemValue="" itemLabel="-- Escolha --" />
+								<f:selectItems value="#{actCompra.listaFornecedor}" />
+							</h:selectOneMenu>
+							<a4j:commandButton value="Novo" id="btAddFornecedor"
+								onclick="document.location.href='/absolut/web/apresentacao/fornecedor/atualizafornecedor.faces'"
+								actionListener="#{actCompra.limpaListaFornecedor}" />
+						</h:panelGroup>
+						<h:outputText value="Tipo pagamento" />
+						<h:selectOneMenu value="#{actCompra.dtoCompra.codPagamento}">
+							<f:selectItem itemValue="0" itemLabel="-- Escolha --" />
+							<f:selectItems value="#{actCompra.listaTipoPagamento}" />
+						</h:selectOneMenu>
+					</h:panelGrid>
+					<rich:panel>
+						<f:facet name="header">
+							<h:panelGroup>
+								<h:outputText value="Itens" />
+								<rich:spacer width="650" />
+								<a4j:commandLink id="bTAddItem" value="Adicionar">
+									<rich:componentControl for="mpAddItem" attachTo="bTAddItem"	operation="show" event="onclick" />
+								</a4j:commandLink>
+							</h:panelGroup>
+						</f:facet>
+						<rich:dataTable id="resultadoConsultaProduto" rows="5"
+							value="#{actCompra.listaItem}" var="item" width="100%"
+							onRowMouseOver="this.style.backgroundColor='#FFF7D6'"
+							onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'">
+							<rich:column id="item_check" align="center">
+								<f:facet name="header">
+									<h:selectBooleanCheckbox
+										onclick="marcaTodasLinhasTabelaJsf(this)" id="marcacaoTodos" />
+								</f:facet>
+								<h:selectBooleanCheckbox value="#{item.selecionado}"
+									id="chkProduto" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Descrição" />
+								</f:facet>
+								<h:outputText value="#{item.descricao}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Fabricante" />
+								</f:facet>
+								<h:outputText value="#{item.fabricante}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Tipo" />
+								</f:facet>
+								<h:outputText value="#{item.descrTipo}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Valor compra" />
+								</f:facet>
+								<h:outputText value="#{item.valCompra}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Valor venda" />
+								</f:facet>
+								<h:outputText value="#{item.valVenda}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Quantidade" />
+								</f:facet>
+								<h:outputText value="#{item.quantidade}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Valor total" />
+								</f:facet>
+								<h:outputText value="#{item.total}" />
+							</rich:column>
+							<f:facet name="footer">
+								<rich:datascroller id="scroll" for="resultadoConsultaProduto"
+									maxPages="10" align="center" page="" renderIfSinglePage="false" />
+							</f:facet>
+						</rich:dataTable>
+						<h:panelGrid columns="3">
+							<h:panelGroup>
+								<h:commandButton id="btExcluiItem" value="Excluir"
+									action="#{actCompra.excluiItem}" disabled="#{actCompra.listaItensVazia}" />
+								<rich:spacer width="320" />
+							</h:panelGroup>
+							<h:panelGrid columns="2">
+								<h:outputText value="Quantidade produtos:"
+									style="font-weight:bold" />
+								<h:inputText value="#{actCompra.dtoCompra.qtdProduto}" size="10"
+									styleClass="campoTexto" readonly="true" />
+							</h:panelGrid>
+							<h:panelGrid columns="2">
+								<h:outputText value="Total geral:" style="font-weight:bold" />
+								<h:inputText value="#{actCompra.dtoCompra.total}" size="10"
+									styleClass="campoTexto" readonly="true" />
+							</h:panelGrid>
+						</h:panelGrid>
+					</rich:panel>
+					<center><h:panelGrid columns="2"
+						rendered="#{!actCompra.novaCompra}">
+						<h:commandButton value="Salvar" styleClass="botoes"
+							action="#{actCompra.salvar}" 
+							onclick="Richfaces.showModalPanel('mpStatusSubmit');"/>
+						<h:commandButton value="Cancelar" styleClass="botoes"
+							action="#{actCompra.cancelar}" />
+					</h:panelGrid><h:panelGrid columns="1" rendered="#{actCompra.novaCompra}">
+						<h:commandButton value="Nova Compra" styleClass="botoes"
+							action="#{actCompra.nova}" />
+					</h:panelGrid></center>
+				</rich:panel>
+				<rich:modalPanel id="mpAddItem" autosized="true" moveable="true"
+					width="600">
+					<f:facet name="header">
+						<h:outputText value="Adicionar item" />
+					</f:facet>
+					<h:panelGrid columns="2" styleClass="tabela" width="100%">
+						<h:outputText value="Produto:" />
+						<h:selectOneMenu id="produto"
+							value="#{actCompra.dtoPesquisaItem.codProduto}">
+							<f:selectItem itemValue="" itemLabel="-- Escolha --" />
+							<f:selectItems value="#{actCompra.listaProduto}" />
+						</h:selectOneMenu>
+						<h:outputText value="Preço compra:" />
+						<h:panelGroup>
+							<h:inputText id="valCompra"
+								value="#{actCompra.dtoPesquisaItem.valorCompra}" size="10"
+								maxlength="10" styleClass="campoTexto"
+								onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this,'999.999,99',event);">
+								<a4j:support event="onblur" ajaxSingle="true" />
+							</h:inputText>
+							<rich:spacer width="40"/>
+							<h:outputText value="Lucro:" />
+							<rich:spacer width="5"/>
+							<h:inputText id="porcentLucro" 
+								value="#{actCompra.dtoPesquisaItem.lucro}" size="10" maxlength="10" styleClass="campoTexto"
+								onkeydown="validaDigito(event)" >
+								<a4j:support event="onblur"
+								action="#{actCompra.calculaLucro}" reRender="valVenda"
+								ajaxSingle="true" />
+							</h:inputText>
+							<h:outputText value="%"/>
+							<rich:spacer width="40"/>
+							<h:outputText value="Preço venda:" />
+							<rich:spacer width="5" />
+							<h:inputText id="valVenda"
+								value="#{actCompra.dtoPesquisaItem.valorVenda}" size="10" maxlength="10" styleClass="campoTexto"
+								readonly="true" />
+						</h:panelGroup>
+						<h:outputText value="Quantidade" />
+						<h:inputText id="quantidade"
+							value="#{actCompra.dtoPesquisaItem.quantidade}" size="10"
+							maxlength="10" styleClass="campoTexto" required="false"
+							requiredMessage="A quantidade é obrigatória"
+							onkeydown="validaDigito(event)">
+							<a4j:support event="onblur"
+								action="#{actCompra.calculaValorTotalItem}" reRender="total"
+								ajaxSingle="true" />
+						</h:inputText>
+						<h:outputText value="Valor total:" />
+						<h:inputText id="total"
+							value="#{actCompra.dtoPesquisaItem.valorTotal}" size="10"
+							maxlength="10" styleClass="campoTexto" required="false"
+							requiredMessage="O valor total é obrigatório"
+							onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this, '999.999,99', event);" />
+						<f:facet name="footer">
+							<h:panelGroup>
+								<center>
+									<h:commandButton id="bTAdicionar"
+										value="Adicionar" action="#{actCompra.adicionaItem}"
+										onclick="javascript: Richfaces.hideModalPanel('mpAddItem');"/>
+
+									<h:commandButton value="Voltar"
+										onclick="javascript: Richfaces.hideModalPanel('mpAddItem');return false;" >
+										<a4j:support event="onclick" reRender="mpAddItem"/>
+									</h:commandButton>
+								</center>
+							</h:panelGroup>
+						</f:facet>
+					</h:panelGrid>
+				</rich:modalPanel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

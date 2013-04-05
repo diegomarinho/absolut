@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="br.absolut.persistencia.produto">
+	<class name="Produto" table="produto">
+		<id name="cod">
+			<generator class="increment" />
+		</id>
+		<property name="codBarra" column="cod_barra" />
+		<property name="descricao" />
+		<property name="fabricante" />
+		<property name="valorCompra" column="preco_compra" />
+		<property name="valorVenda" column="preco_venda" />
+		<property name="saldoAtual" column="saldo_atual" />
+		<property name="dtExclusao" column="dt_exclusao" type="java.util.Date" />
+		
+		<many-to-one name="tipoProduto" class="TipoProduto" column="cod_tipo_produto" unique="true" lazy="false" />
+	</class>
+</hibernate-mapping>

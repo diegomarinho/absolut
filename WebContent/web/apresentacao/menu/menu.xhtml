@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/faces"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<h:form id="formMenu">
+	<rich:toolBar>
+		<rich:dropDownMenu>
+			<f:facet name="label">
+				<h:panelGroup>
+					<h:panelGrid columns="2"
+						onclick="document.location.href='/absolut/web/apresentacao/principal/principal.faces'">
+						<h:graphicImage value="../../../common/image/imgHome.png" />
+						<h:outputText value="Principal" />
+					</h:panelGrid>
+				</h:panelGroup>
+			</f:facet>
+		</rich:dropDownMenu>
+		<rich:dropDownMenu>
+			<f:facet name="label">
+				<h:panelGroup>
+					<h:panelGrid columns="2">
+						<h:graphicImage value="../../../common/image/imgCliente.png" />
+						<h:outputText value="Cliente" />
+					</h:panelGrid>
+				</h:panelGroup>
+			</f:facet>
+			<rich:menuItem submitMode="none" value="Cadastrar" onclick="document.location.href='/absolut/web/apresentacao/cliente/atualizacliente.faces'" />
+			<rich:menuItem submitMode="none" value="Consultar" onclick="document.location.href='/absolut/web/apresentacao/cliente/consultacliente.faces'" />
+		</rich:dropDownMenu>
+		<rich:dropDownMenu>
+			<f:facet name="label">
+				<h:panelGroup>
+					<h:panelGrid columns="2">
+						<h:graphicImage value="../../../common/image/imgFornecedor.png" />
+						<h:outputText value="Fornecedor" />
+					</h:panelGrid>
+				</h:panelGroup>
+			</f:facet>
+			<rich:menuItem submitMode="none" value="Cadastrar" onclick="document.location.href='/absolut/web/apresentacao/fornecedor/atualizafornecedor.faces'" />
+			<rich:menuItem submitMode="none" value="Consultar" onclick="document.location.href='/absolut/web/apresentacao/fornecedor/consultafornecedor.faces'" />
+		</rich:dropDownMenu>
+		<rich:dropDownMenu>
+			<f:facet name="label">
+				<h:panelGroup>
+					<h:panelGrid columns="2">
+						<h:graphicImage value="../../../common/image/imgProduto.png" />
+						<h:outputText value="Produto" />
+					</h:panelGrid>
+				</h:panelGroup>
+			</f:facet>
+			<rich:menuItem submitMode="none" value="Cadastrar" onclick="document.location.href='/absolut/web/apresentacao/produto/atualizaproduto.faces'" />
+			<rich:menuItem submitMode="none" value="Consultar" onclick="document.location.href='/absolut/web/apresentacao/produto/consultaproduto.faces'" />
+		</rich:dropDownMenu>
+		<rich:dropDownMenu>
+			<f:facet name="label">
+				<h:panelGroup>
+					<h:panelGrid columns="2">
+						<h:graphicImage value="../../../common/image/imgMovimento.png" />
+						<h:outputText value="Movimento" />
+					</h:panelGrid>
+				</h:panelGroup>
+			</f:facet>
+			<rich:menuItem submitMode="none" value="Entrada" onclick="document.location.href='/absolut/web/apresentacao/compra/compra.faces'" />
+			<rich:menuItem submitMode="none" value="Saida" onclick="document.location.href='/absolut/web/apresentacao/venda/venda.faces'" />
+		</rich:dropDownMenu>
+		<rich:dropDownMenu>
+			<f:facet name="label">
+				<h:panelGroup>
+					<h:panelGrid columns="2"
+						onclick="document.location.href='/absolut/web/apresentacao/relatorio/relatorio.faces'">
+						<h:graphicImage value="../../../common/image/imgRelatorio.png" />
+						<h:outputText value="Relat&#243;rios" />
+					</h:panelGrid>
+				</h:panelGroup>
+			</f:facet>
+		</rich:dropDownMenu>
+		<rich:dropDownMenu>
+			<f:facet name="label">
+				<h:panelGroup>
+					<h:panelGrid columns="2">
+						<h:graphicImage value="../../../common/image/imgUsuario.png" />
+						<h:outputText value="Usu&#225;rio" />
+					</h:panelGrid>
+				</h:panelGroup>
+			</f:facet>
+			<rich:menuItem submitMode="none" value="Cadastrar" onclick="document.location.href='/absolut/web/apresentacao/usuario/atualizausuario.faces'" />
+			<rich:menuItem submitMode="none" value="Consultar" onclick="document.location.href='/absolut/web/apresentacao/usuario/consultausuario.faces'"/>
+		</rich:dropDownMenu>
+	</rich:toolBar>
+</h:form>
+</ui:composition>

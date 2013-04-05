@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Consultar fornecedor" />
+		</ui:define>
+		<ui:define name="corpo">
+			<rich:spacer height="30"/>
+			<h:outputText value="Consultar fornecedores" styleClass="nomeTela" />
+			<h:form id="formFornecedor">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage value="../../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+				<rich:panel header="Dados pesquisa" style="width:98%;">
+					<h:panelGrid columns="2" styleClass="tabela" width="99%">
+						<h:outputText value="CNPJ:" />
+						<h:inputText value="#{actConsultaFornecedor.dtoConsulta.cnpj}"
+							size="20" maxlength="18" styleClass="campoTexto"
+							onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this, '99.999.999/9999-99', event);" />
+						<h:outputText value="Nome:" />
+						<h:inputText value="#{actConsultaFornecedor.dtoConsulta.nome}"
+							size="80" maxlength="100" styleClass="campoTexto" />
+						<f:facet name="footer">
+							<h:panelGroup style="semBorda">
+								<center><h:commandButton value="Consultar"
+									action="#{actConsultaFornecedor.consultar}"
+									onclick="Richfaces.showModalPanel('mpStatusSubmit');" styleClass="botoes"/></center>
+							</h:panelGroup>
+						</f:facet>
+					</h:panelGrid>
+				</rich:panel>
+				<rich:panel header="Resultado consulta" style="width:98%"
+					rendered="#{actConsultaFornecedor.seMostraResultado}">
+					<rich:dataTable id="resultadoConsultaFornecedor" rows="5"
+						value="#{actConsultaFornecedor.listaResultado}" var="item"
+						width="100%"
+						onRowMouseOver="this.style.backgroundColor='#FFF7D6'"
+						onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'">
+
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+							<h:outputText value="#{item.nome}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="CNPJ" />
+							</f:facet>
+							<h:outputText value="#{item.cnpj}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Telefone" />
+							</f:facet>
+							<h:outputText value="#{item.telefone}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Agencia" />
+							</f:facet>
+							<h:outputText value="#{item.agencia}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Conta corrente" />
+							</f:facet>
+							<h:outputText value="#{item.contaCorrente}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Banco" />
+							</f:facet>
+							<h:outputText value="#{item.banco}" />
+						</rich:column>
+						<rich:column>
+							<h:commandLink action="#{actConsultaFornecedor.alterar}">
+								<f:setPropertyActionListener value="#{item.cod}"
+									target="#{actConsultaFornecedor.codFornecedor}" />
+								<h:graphicImage value="../../../common/image/imgBotaoAlterar.gif"
+									title="Alterar fornecedor" />
+							</h:commandLink>
+						</rich:column>
+						<rich:column>
+							<a4j:commandLink  id="cLExcluir">
+								<rich:componentControl for="mpConfirmaExclusao" attachTo="cLExcluir" operation="show" event="onclick" />
+								<f:setPropertyActionListener value="#{item.cod}"
+									target="#{actConsultaFornecedor.codFornecedor}" />
+								<h:graphicImage value="../../../common/image/imgBotaoExcluir.gif"
+									title="Excluir fornecedor" />
+							</a4j:commandLink>
+						</rich:column>
+						<f:facet name="footer">
+							<rich:datascroller id="scroll" for="resultadoConsultaFornecedor"
+								maxPages="10" align="center"
+								page="#{actConsultaFornecedor.scrollerPage}"
+								renderIfSinglePage="false" />
+						</f:facet>
+					</rich:dataTable>
+				</rich:panel>
+				<rich:modalPanel id="mpConfirmaExclusao" autosized="true"
+					moveable="true" width="300">
+					<f:facet name="header">
+						<h:outputText value="Confirmar exclusão" />
+					</f:facet>
+					<center><h:outputText
+						value="Confirma exclusão do fornecedor?" style="font-weight:bold;" /></center>
+					<br />
+					<center><h:commandButton value="Sim"
+						onclick="javascript: Richfaces.hideModalPanel('mpConfirmaExclusao');" 
+						actionListener="#{actConsultaFornecedor.excluir}"
+						action="#{actConsultaFornecedor.atualizaResultado}"/>
+					<h:commandButton value="Não"
+						onclick="javascript: Richfaces.hideModalPanel('mpConfirmaExclusao');return false;" /></center>
+				</rich:modalPanel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

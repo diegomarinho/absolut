@@ -1,0 +1,1350 @@
+@CHARSET "ISO-8859-1";
+
+/************************************
+Classe: Menu horizontal
+Funcão: Formatar o menu horizontal
+*************************************/
+#menuhor {
+	border: none;
+	margin: 0;
+	font: 20px Arial, sans-serif;
+}
+
+#menuhor li {
+	list-style: none;
+	margin: 0;
+	display: inline;
+}
+
+#menuhor li a {
+	height: 1px; /* IE5.0 bug */
+	padding: 3px 1px;
+	margin: 0;
+	border: 1px solid #f00;
+	background: #999;
+	text-decoration: none;
+}
+
+#menuhor li a:link {
+	color: #fff;
+}
+
+#menuhor li a:visited {
+	color: #fff;
+}
+
+#menuhor li a:hover {
+	background: #ccc;
+	color: #000;
+	border-color: #000;
+}
+
+/* ================================================================ 
+This copyright notice must be kept untouched in the stylesheet at 
+all times.
+
+The original version of this stylesheet and the associated (x)html
+is available at http://www.cssplay.co.uk/menus/pro_drop6.html
+Copyright (c) 2005-2007 Stu Nicholls. All rights reserved.
+This stylesheet and the associated (x)html may be modified in any 
+way to fit your requirements.
+=================================================================== */
+.preload1 {
+	background: url(../img/six_0a.gif);
+}
+
+.preload2 {
+	background: url(../img/six_1a.gif);
+}
+
+#nav {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	height: 35px;
+	background: #007676 url(../img/six_0.jpg) repeat-x;
+	position: relative;
+	z-index: 200;
+	font-family: arial, verdana, sans-serif;
+}
+
+#nav li.top {
+	display: block;
+	float: left;
+}
+
+#nav li a.top_link {
+	display: block;
+	float: left;
+	height: 35px;
+	line-height: 33px;
+	color: #ccc;
+	text-decoration: none;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 0 0 0 12px;
+	cursor: pointer;
+	background: url(../img/six_0.jpg);
+}
+
+#nav li a.top_link span {
+	float: left;
+	display: block;
+	padding: 0 24px 0 12px;
+	height: 35px;
+	background: url(../img/six_0.jpg) right top no-repeat;
+}
+
+#nav li a.top_link span.down {
+	float: left;
+	display: block;
+	padding: 0 24px 0 12px;
+	height: 35px;
+	background: url(../img/six_0a.gif) no-repeat right top;
+}
+
+#nav li:hover a.top_link,#nav a.top_link:hover {
+	color: #fff;
+	background: url(../img/six_1.jpg) no-repeat;
+}
+
+#nav li:hover a.top_link span,#nav a.top_link:hover span {
+	background: url(../img/six_1.jpg) no-repeat right top;
+}
+
+#nav li:hover a.top_link span.down,#nav a.top_link:hover span.down {
+	background: url(../img/six_1a.gif) no-repeat right top;
+	padding-bottom: 3px;
+}
+
+#nav table {
+	border-collapse: collapse;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#nav li:hover {
+	position: relative;
+	z-index: 200;
+}
+
+#nav a:hover {
+	position: relative;
+	white-space: normal;
+	z-index: 200;
+}
+
+#nav :hover ul.sub {
+	left: 0px;
+	top: 35px;
+	background: #0B5079;
+	padding: 3px;
+	white-space: normal;
+	width: auto;
+	height: auto;
+	z-index: 300;
+}
+
+#nav :hover ul.sub li {
+	display: block;
+	height: 20px;
+	position: relative;
+	float: left;
+	width: 90px;
+	font-weight: normal;
+}
+
+#nav :hover ul.sub li a {
+	display: block;
+	font-size: 11px;
+	height: 18px;
+	width: 88px;
+	line-height: 18px;
+	text-indent: 5px;
+	color: #ccc;
+	text-decoration: none;
+}
+
+#nav li ul.sub li a.fly {
+	background: #50b5d0 url(../img/arrow.gif) 80px 6px no-repeat;
+}
+
+#nav :hover ul.sub li a:hover {
+	background: #3f96a9;
+	color: #fff;
+	border-color: #fff;
+}
+
+#nav :hover ul.sub li a.fly:hover {
+	background: #3f96a9 url(../img/arrow_over.gif) 80px 6px no-repeat;
+	color: #fff;
+}
+
+#nav li b {
+	display: block;
+	font-size: 11px;
+	height: 18px;
+	width: 88px;
+	line-height: 18px;
+	margin-bottom: 3px;
+	text-indent: 6px;
+	color: #ff6;
+	border-bottom: 1px solid #ff6;
+	cursor: default;
+}
+
+#nav a:hover a:hover ul,#nav a:hover a:hover a:hover ul,#nav a:hover a:hover a:hover a:hover ul,#nav a:hover a:hover a:hover a:hover a:hover ul
+	{
+	left: 89px;
+	top: -4px;
+	background: #50b5d0;
+	padding: 3px;
+	border: 1px solid #0b4d97;
+	white-space: nowrap;
+	width: 90px;
+	z-index: 400;
+	height: auto;
+}
+
+#nav ul,#nav a:hover ul ul,#nav a:hover a:hover ul ul,#nav a:hover a:hover a:hover ul ul,#nav a:hover a:hover a:hover a:hover ul ul
+	{
+	position: absolute;
+	left: -9999px;
+	top: -9999px;
+	width: 0;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#nav li:hover li:hover>ul {
+	left: 90px;
+	top: -4px;
+	background: #50b5d0;
+	padding: 3px;
+	border: 1px solid #0b4d97;
+	white-space: nowrap;
+	width: 90px;
+	z-index: 400;
+	height: auto;
+}
+
+#nav li:hover>ul ul {
+	position: absolute;
+	left: -9999px;
+	top: -9999px;
+	width: 0;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#nav li:hover li:hover>a.fly {
+	background: #3f96a9 url(../img/arrow_over.gif) 80px 6px no-repeat;
+	color: #fff;
+	border-color: #fff;
+}
+
+#nav li:hover li:hover>li a.fly {
+	background: #50b5d0 url(../img/arrow.gif) 80px 6px no-repeat;
+	color: #000;
+	border-color: #50b5d0;
+}
+
+/*********************************
+Classe: h1
+Função: Formatar o título da tela.
+*********************************/
+
+h1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	background-color: #ffffff;
+	color: #333366;
+	padding: 0px 0px 0px 0px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+/***************************************************************************
+Classe: nomeTela
+Função: Formatar o nome da tela que se apresenta no canto superior esquerdo
+Atenção: em DESUSO, já que o h1 substitui essa classe e é mais simples de ser
+usado.
+***************************************************************************/
+
+.nomeTela	{
+	font-family: Impact, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	background-color: none;
+	color: #009AD5;
+	margin-left:15px;
+}
+
+/***************************************************************************
+Classe: nomeCampo
+Função: Formatar o nome da tela que se apresenta no canto superior esquerdo
+Atenção: em DESUSO, já que o h1 substitui essa classe e é mais simples de ser
+usado.
+***************************************************************************/
+
+.nomeCampo	{
+	font-family: Times new roman, Helvetica, sans-serif;
+	font-size: 16px;
+	color: black;
+}
+
+/***************************************************************************
+Classe: nomeTelaErro
+Função: Formatar o nome da tela que se apresenta no canto superior esquerdo
+Atenção: em DESUSO, já que o h1 substitui essa classe e é mais simples de ser
+usado.
+***************************************************************************/
+
+.nomeTelaErro	{
+	font-family: Impact, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	left: 60px;
+	background-color: #ffffff;
+	color: #FF0000;
+	padding: 5px 10px 5px 2px;
+	position: absolute;
+
+}
+
+/*************************************************************************************
+Classe: migalhaDePao
+Função: Formatar o tamanho da fonte do caminho das migalhas de pão (breadcrumb trail)
+*************************************************************************************/
+
+.migalhaDePao {
+font: 9px Arial, sans-serif;
+}
+
+/*********************************************************************************
+Classe: msgExplicaErro
+Função: Formatar o texto que vem abaixo do campo que foi prenchido incorretamente.
+*********************************************************************************/
+
+.msgExplicaErro {
+font-family: Verdana; 
+font-size: 9px; 
+color: #ff0000; 
+}
+
+/******************************************************************
+Classe: msgExplicaCampo
+Função: Formatar o texto que vem ao lado do campo a ser preenchido.
+******************************************************************/
+
+.msgExplicaCampo {
+font-family: Verdana; 
+font-size: 9px; 
+}
+		
+/***********************************
+Classe: tabela
+Função: Formatar a tabela principal.
+***********************************/
+
+table.tabela{
+     border-collapse:separate !important; 
+	 border-collapse:collapse;
+	 font-family: Arial, Helvetica, sans-serif;	
+	 font-size: 11px; 
+	 font-style: normal; 
+	 font-weight: normal; 
+	 line-height: normal; 
+	 margin-left:2px;
+	 margin-right:2px;
+	 margin-top:0px;
+	 margin-bottom:2px;
+	 padding: 2px; 
+	 height: auto;
+	 line-height:150%;
+}
+table.tabela th{
+    padding:5px;
+  	background-color: #dddddd;
+	color: #000000;
+	border: 1px solid #dddddd;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: left;
+}
+
+table.tabela thead td{
+font-size: 11px;
+background-color: #FFFFFF; 
+}
+
+table.tabela tr{
+  height:0px;
+  font-size: 11px;
+  
+}
+table.tabela td{
+    border: 1px solid #dddddd;
+	color:#000000;
+	font-size: 11px;
+}
+
+/*********************************************
+Classe: fullwidth
+Função: Deixa uma coluna com full width (100%)
+*********************************************/
+.fullWidth {
+	width: 100%;	
+}
+
+/*********************************************
+Classe: tabelaSemLateral
+Função: Evitar o gradeado na tabela principal.
+*********************************************/
+   
+table.tabelaSemLateral   {                               
+	font-family: Arial, Helvetica, sans-serif;	
+	font-size: 11px; 
+	font-style: normal; 
+	font-weight: normal; 
+	line-height: normal; 
+	margin: 2px; 
+	padding: 2px 5px 2px 5px; 
+	height: auto;
+}
+
+
+table.tabelaSemLateral th {
+	background-color: #007676;
+	color: #ffffff;
+	border: 1px solid #007676;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: left;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px; /* alteração no padding para as células não ficarem coladas. */
+}
+
+table.tabelaSemLateral tr.corEscura {
+	background-color: #ededed;
+	font-size: 11px;
+	border-left-style: none;
+	border-right-style: none;
+	border-top-style: none;
+	border-bottom-style: none;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px; /* alteração no padding para as células não ficarem coladas. */
+}    
+
+table.tabelaSemLateral td {
+	border: 1px solid #dddddd;
+	font-size: 11px;
+	border-left-style: none;
+	border-right-style: none;
+	border-top-style: none;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px; /* alteração no padding para as células não ficarem coladas. */
+}
+
+/*********************************************
+Classe: tabelaSemBorda
+Função: Evitar o gradeado na tabela principal.
+*********************************************/
+   
+table.tabelaSemBorda   {                               
+	font-family: Arial, Helvetica, sans-serif;	
+	font-size: 11px; 
+	font-style: normal; 
+	font-weight: normal; 
+	line-height: normal; 
+	margin: 2px; 
+	padding: 2px 5px 2px 5px; 
+	height: auto;
+}
+
+
+table.tabelaSemBorda th {
+	background-color: #009AD5;
+	color: #ffffff;
+	border: 1px solid #009AD5;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: left;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px; /* alteração no padding para as células não ficarem coladas. */
+}
+
+table.tabelaSemBorda tr.corEscura {
+	background-color: #ededed;
+	font-size: 11px;
+	border-left-style: none;
+	border-right-style: none;
+	border-top-style: none;
+	border-bottom-style: none;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px; /* alteração no padding para as células não ficarem coladas. */
+}    
+
+table.tabelaSemBorda td {
+	/*border: 1px solid #dddddd; */
+	font-size: 11px;
+	border-left-style: none;
+	border-right-style: none;
+	border-top-style: none;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px; /* alteração no padding para as células não ficarem coladas. */
+}    
+
+/*******************************************************
+Classe: envolveRadio
+Função: Formatação da tabela que envolve o radio no JSF          		
+*******************************************************/
+
+table.envolveRadio {
+	border: 0px;
+	padding: 0px;
+}
+
+table.envolveRadio td {
+	border: 0px;
+	padding: 0px;
+}
+
+/************************************************************************
+Classe: msgAtencao
+Função: Formatar a tabela que apresenta a mensagem de atenção ao usuário.
+************************************************************************/
+
+table.msgAtencao	{ 
+	width:100%; 
+	border: 1px solid #996600; 
+}
+
+table.msgAtencao td	{
+	color:#996600;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold; 
+	font-size: 12px;
+}
+
+/****************************************************************************
+Classe: msgConfirmacao
+Função: Formatar a tabela que apresenta a mensagem de confirmação ao usuário.
+****************************************************************************/
+	
+table.msgConfirmacao	{ 
+	width:98%; 
+	border: 1px solid #0033ff; 
+}
+table.msgConfirmacao td	{
+	color:#0033ff;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold; 
+	font-size: 12px;
+}
+
+/*********************************************************************
+Classe: rich-messages-lagel
+Função: Formatar as mensagens usadas na tag <rich:messages>.
+*********************************************************************/
+.rich-messages-label{
+font-size: 12px;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.msgError {
+	color:red;
+}
+
+.msgWarn {
+	color:#FFCC33;
+}
+
+.msgInfo {
+	color: blue;
+}
+
+/****************************************
+Classe: botoes
+Função: Formatar os inputs do tipo botão.
+****************************************/
+
+.botoes {    
+	border: 1px outset #FFFFFF; 
+	color: #FFFFFF; 
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 11px; 
+	font-style: normal;
+	line-height: normal; 
+	margin: 2px; 
+	padding: 1px; 
+	height: 25px; 
+	width: 110px; 
+	background-color: #009AD5; 
+        vertical-align: text-bottom; 
+}
+
+/*******************************************************************************
+Classe: botoesGrandes
+Função: Formatar os inputs do tipo botão quando estes apresentam um texto longo.
+*******************************************************************************/
+	
+.botoesGrandes {    
+	border: 1px outset #FFFFFF; 
+	color: #333366; 
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 11px; 
+	font-style: normal;
+	line-height: normal; 
+	margin: 2px; 
+	padding: 1px; 
+	height: 25px; 
+	width: auto; 
+	background-color: #009AD5; 
+        vertical-align: text-bottom; 
+}
+
+/*********************************
+Classe: Todas as tags <select>
+Função: Formatar as tags <select>. 
+	Exemplo: Combobox
+*********************************/
+        
+select	{ 
+	font-family: Arial, Helvetica; 
+	font-size: 11px;
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	border-top: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC; 
+	z-index:1;
+}
+
+select.combo {
+	border: 1px outset #FFFFFF;
+	background-color: #EDEDED;
+	color: #333366;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size: 11px;
+	z-index:1;
+}
+
+
+/***********************************
+Classe: campoTexto
+Função: Formatar os campos de texto.
+***********************************/
+
+.campoTexto {
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	border-top: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+	font: 12px Arial, sans-serif;
+	color:#000000;
+}
+
+/***********************************************************************************
+Classe: campoTextoErro
+Função: Formatar e destar os campos de texto que não foram preenchidos corretamente.
+***********************************************************************************/
+
+.campoTextoErro {
+	border-right: 1px solid #cc0000;
+	border-bottom: 1px solid #cc0000;
+	border-top: 1px solid #cc0000;
+	border-left: 1px solid #cc0000;
+	font: 12px Arial, sans-serif;
+	color:#000000;
+	background-color: #ffcccc; 
+}
+
+/**********************************
+Classe: textarea
+Função: Formatar as áreas de texto.
+**********************************/
+
+textarea	{
+	height: 80px;
+	font: 11px Arial, sans-serif;
+}
+
+/********************
+Classes do calendário
+********************/
+/********************************************************************************
+Classe: diasValidos
+Função: Formatar os dias válidos do calendário gerado pela função abreCalendário.
+        Utilizada somente pela função abreCalendário.
+********************************************************************************/
+
+.diasValidos {
+	background-color: #dddddd;
+	font: 10px Arial;
+	color: #333333;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #cccccc;
+	cursor: pointer;
+}
+
+/********************************************************************************
+Classe: diasInvalidos
+Função: Formatar os dias inválidos do calendário gerado pela função abreCalendário.
+        Utilizada somente pela função abreCalendário.
+********************************************************************************/
+
+.diasInvalidos {
+	background-color:#dddddd;
+	font:10px Arial;
+	color:#ABABAB;
+	text-align:center;
+	text-decoration:line-through;
+	border:1px solid #cccccc;
+	cursor:default;
+}
+
+/********************************************************************************
+Classe: diaSelecionado
+Função: Formatar o dia selecionado no calendário gerado pela função abreCalendário.
+        Utilizada somente pela função abreCalendário.
+********************************************************************************/
+
+.diaSelecionado {
+	background-color:#ffffcc;
+	font:bold 10px Arial;
+	color:#333333;
+	text-align:center;
+	border:1px solid #cccccc;
+	cursor:pointer;
+}
+
+/********************************************************************************
+Classe: diaFocus
+Função: Formatar o dia que está em foco no calendário gerado pela função abreCalendário.
+        Utilizada somente pela função abreCalendário.
+********************************************************************************/
+
+.diaFocus{
+        background-color:#ffffff;
+        font: 10px Arial;
+	color: #333333;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #cccccc;
+	cursor: pointer;
+}
+
+/********************************************************************************
+Classe: diaBlur
+Função: Formatar o dia ao perder o foco no calendário gerado pela função abreCalendário.
+        Utilizada somente pela função abreCalendário.
+********************************************************************************/
+
+.diaBlur{
+    background-color:#dddddd;
+    font: 10px Arial;
+	color: #333333;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #cccccc;
+	cursor: pointer;
+}
+
+/********************************************************************************
+Classe: linhaMesAnoSetas
+Função: Formatar as setas do cabeçalho do calendário gerado pela função abreCalendário.
+        Utilizada somente pela função abreCalendário.
+********************************************************************************/
+
+.linhaMesAnoSetas {
+	cursor:pointer;
+	text-align:center;
+	font:bold 11px Arial;
+	background-color:#ffffff;
+}
+
+/********************************************************************************
+Classe: linhaDiasSemana
+Função: Formatar a linha dos dias da semana no cabeçalho do calendário gerado pela função abreCalendário.
+        Utilizada somente pela função abreCalendário.
+********************************************************************************/
+
+.linhaDiasSemana {
+	text-align:center;
+	background-color:#ABABAB;
+	font:11px Arial;
+}
+
+/********************************************************************************
+Classe: semBorda
+Função: Formatar a tabela sem borda nenhuma.
+********************************************************************************/
+
+table.semBorda  { 
+	border: 0;
+	font-family: Arial, Helvetica, sans-serif;	
+	font-size: 11px; 
+	font-style: normal; 
+	font-weight: normal; 
+	line-height: normal; 
+	padding: 0px 0px 0px 0px;
+	margin: 0px;   
+	border-color:window;
+}
+
+table.semBorda td { 
+	border: 0; 
+	padding: 0px 0px 0px 0px;
+	margin: 0px; 
+}
+
+/********************************************
+Classe: selecionaArquivo
+Função: Formatar a tag input do tipo file.
+********************************************/
+
+.selecionarArquivo {
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	border-top: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+	font: 11px Arial, sans-serif;
+	color:#000000;
+	
+}
+
+/****************************************
+Classe: ul
+Função: Formatar as listas de ordenação.
+****************************************/
+
+ul {
+	margin:0;
+	list-style-type: disc;
+	list-style-position:inside;
+}
+
+/****************************************
+Classe: telaEspera
+Função: Estilo para elementos que tenham a
+id=telaEspera. Usado para exibir gif de
+"carregando"
+****************************************/
+    #telaEspera {
+	top: 0px;
+	left: 0px;
+	position: fixed;    
+    background:#000000;
+    z-index:50; 
+    width:100%;
+    height:100%;
+    -moz-opacity: 0.45; /*Firefox*/
+    filter: alpha(opacity=45); /*IE*/
+    opacity: 0.45; /*CSS3 - Opera*/
+        
+}
+
+
+/****************************************
+Classe: imagemCentro
+Função: Classe específica para centralizar
+qualquer imagem ao centro da tela
+****************************************/
+.imagemCentro {
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-left:-50px;
+	margin-top:-50px;
+    z-index:100;
+}
+
+/****************************************
+Classes para as abas (Tabbed Pane) do Tomahawk
+Função: formatar os diversos elementos utilizados
+pelo Tomahawk na produção de abas.
+Por isso essa quantidade de classes.
+****************************************/
+
+.myFaces_panelTabbedPane{
+	font-family: Arial, Helvetica, sans-serif;	
+	font-size: 11px; 
+	font-style: normal; 
+	font-weight: normal; 
+	line-height: normal; 
+	margin: 2px; 
+	padding: 2px 5px 2px 5px; 
+	height: auto;
+    width: 99%;
+}
+
+.myFaces_panelTabbedPane_activeHeaderCell input{
+	border-bottom: none;
+	background-image: url("../imagens/fundoMenuAbas.gif");
+	height:28px;
+	font-family: Arial, Helvetica;  
+	font-size: 11px;
+	font-weight: bold; 
+}
+
+.myFaces_panelTabbedPane_inactiveHeaderCell{
+        border-right: none;
+        border-top: none;
+        border-left: none;
+        border-bottom: none;
+        background-color: #ffffff;
+        font-family: Arial, Helvetica;  
+        font-size: 11px;
+        font-weight: normal;
+        padding: 0px 1px 0px 1px;  
+}
+
+.myFaces_panelTabbedPane_inactiveHeaderCell input{
+        border-right: none;
+        border-top: none;
+        border-left: none;
+        border-bottom: none;
+        background-color: #DDDDDD;
+        height:28px;
+        font-family: Arial, Helvetica;  
+        font-size: 11px;
+        font-weight: normal;  
+		color: #000000
+}
+
+.myFaces_panelTabbedPane_pane {
+		border: 1px solid #dddddd;
+		font-size: 11px;
+		border-left-style: none;
+		border-right-style: none;
+		border-top-style: none;
+		padding-top: 2px;
+		padding-bottom: 2px;
+		padding-left: 1px; /* alteração no padding para as células não ficarem coladas. */
+}
+
+.myFaces_panelTabbedPane td{
+        padding-left: 1px; /* alteração no padding para as células não ficarem coladas. */
+}
+
+.myFaces_panelTabbedPane_subHeaderCell myFaces_panelTabbedPane_subHeaderCell_inactive{
+        display: none;
+}
+
+.myFaces_panelTabbedPane_emptyHeaderCell {
+        display: none;
+}
+
+.myFaces_panelTabbedPane_subHeaderCell{
+        display: none;
+}
+
+.myFaces_panelTabbedPane_subHeaderCell_last{
+        display: none;
+}
+
+/****************************************
+Classes para o calendário (inputCalendar) do Tomahawk
+Função: Formatar o calendário criado pelo inputCalendar
+do Tomahawk.
+****************************************/
+
+
+.jscalendar-DB-table-style {
+    background-color:#FFFFFF;
+    border:0px none;
+    font-family:arial;
+    font-size:11px;
+    width:250px;
+}
+
+.jscalendar-DB-title-style {
+    color:#FFFFFF;
+    font-family:arial;
+    font-weight:bold;
+    padding:2px;
+    width:95%;
+}
+
+.jscalendar-DB-title-background-style img{
+    border-color:#003366;
+}
+
+.jscalendar-DB-title-background-style {
+    background-color:#003366;
+}
+
+.jscalendar-DB-title-control-normal-style {
+	border:0px none;
+	cursor:pointer;
+}
+
+.jscalendar-DB-title-control-select-style {
+    border:0px none;
+    cursor:pointer;
+}
+
+.jscalendar-DB-dropdown-style {
+    background-color:#FFFFFF;
+    border:1px solid #A0A0A0;
+    cursor:pointer;
+    font-family:arial;
+    font-size:11px;
+}
+
+.jscalendar-DB-dropdown-select-style {
+background-color:#EAEAF4;
+}
+
+.jscalendar-DB-current-day-style {
+    color:blue;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.jscalendar-DB-end-of-weekday-style {
+    color:black;
+    font-weight:bold;
+}
+
+.jscalendar-DB-body-style {
+    background-color:#FFFFFF;
+    font-family:verdana;
+    font-size:10px;
+    text-align:right;
+    width:100%;
+}
+
+.jscalendar-DB-normal-day-style {
+    color:#000000;
+    text-decoration:none;
+}
+
+.jscalendar-DB-would-be-selected-day-style {
+    background-color:#EAEAF4;
+}
+
+.jscalendar-DB-selected-day-style {
+    border:1px solid #000000;
+}
+
+.jscalendar-DB-today-style {
+    background-color:#009AD5;
+    color:#FFFFFF;
+    padding:0px;
+    text-align:center;
+    text-decoration:none;
+}
+
+.jscalendar-DB-today-lbl-style {
+    padding:5px;
+    text-align:center;
+}
+
+/*********************************
+Classe: Form
+Função: Formatar as tags <form>
+*********************************/
+
+form {
+	border: 0pt;
+}
+
+/*************************************************
+Classe: Pesquisa Avançada
+Função: Formatar a tabela de campos de pesquisa
+*************************************************/
+.pesquisaAvancada{
+	border-collapse:collapse;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	font-weight: normal;
+	line-height: normal;
+	margin-left:2px;
+	margin-right:2px;
+	margin-top:0px;
+	margin-bottom:2px;
+	padding: 2px;
+	height: auto;
+	line-height:150%;
+	border: 1px solid #000;
+	background-color:#fff;
+}
+
+/*************************************************
+Classe: Tabela de Navegacao
+Função: Formatar os links da tabela de navegacao
+*************************************************/
+
+p.navegacao img { 
+    border: none; 
+}
+
+p.navegacao a {
+    color: #000;
+    font-weight: bold;
+    padding: 0 5px;
+}
+p.navegacao span { 
+    padding: 0 5px; 
+    color: #C04849; 
+    font-weight: bold; 
+}
+
+/***********************************
+Classe: tooltip
+Função: Formatar uma div de tooltip.
+***********************************/
+.tooltip{
+	text-align:justify;
+	font: 12px arial, verdana, helvetica, sans-serif; 
+	padding:5px 10px;
+	border:1px solid #363A5C;
+	background:#FFFFCC; 
+	color:#000;
+	position:absolute;
+	display:none;
+}
+
+/************************************
+
+
+************************************/
+.conteudo {
+	position: relative;
+	margin: 0 18px 0px 18px;
+	border: 1px solid #346cbe;
+	background: #fff;
+}
+
+.viewContent {
+	margin: 0 18px 0px 18px;
+}
+
+h1.cont {
+	background-color: #BED6F8;
+	padding: 0px 8px;
+	font-size: 15px;
+	margin: 0 0 10px 0;
+	white-space: nowrap;
+	text-align: left
+}
+
+h1.cont span {
+	background-color: #f8f8f8;
+	padding: 0px 8px;
+	font-weight: bold;
+	color: #1B7BBE;
+}
+
+p.noteMain {
+	padding: 15px 15px 15px 15px;
+	border: 1px solid #ACBECE;
+	background: #F0F3F7
+}
+
+.textAlign {
+	text-align: center;
+}
+
+.alignRightButtonClass {
+	position: absolute;
+	right: 42px;
+}
+
+.alignCenterClass {
+	margin: 0px auto 0px auto;
+	text-align: center;
+}
+
+.newFormClass {
+	border: 2px solid #F0F0F0;
+	width: 100%;
+}
+
+.formClass {
+	background-color: #F0F0F0;
+	width: 100%;
+}
+
+.formClass td {
+	border: 2px solid white;
+}
+
+.fieldPadding td {
+	padding-right: 3px;
+}
+
+.imageClass {
+	height: 100%;
+}
+
+.imageClass td {
+	background-color: white;
+	padding: 0 3px 0 3px;
+}
+
+.labelClass {
+	font-weight: bold;
+	font-size:11px;
+	white-space: nowrap;
+}
+
+.noCellBorderClass td {
+	border: none;
+}
+
+.nomeUsrClass {
+	width: 60%;
+}
+
+.loginUsrClass {
+	width: 40%;
+}
+
+.fullWidthClass {
+	width: 100%;
+}
+
+.fullHeightClass {
+	height: 100%;
+}
+
+.centerClass {
+	text-align: center;
+}
+
+.msgErro {
+	margin-left: 5px;
+	color: red;
+}
+
+.noStyleClass {
+	
+}
+
+p.note {
+	background: url(../../common/images/note_bg.gif) top left no-repeat
+		#F0F3F7;
+	padding: 15px 15px 15px 45px;
+	border: 1px solid #ACBECE;
+	margin: 0px;
+}
+
+p.botoes {
+	border-top: 1px solid #ddd;
+	padding: 10px !important;
+	margin: 10px 0 0 0 !important;
+	text-align: center;
+}
+
+.obrigatorio {
+	font-weight: bold;
+	color: #c00;
+	margin-right: 2px;
+}
+
+.noWrapClass {
+	white-space: nowrap;
+}
+
+.formFieldClass {
+	width: 100%;
+}
+
+div.errorMessage {
+	border:1px solid #ccc;margin:18px; padding:10px 20px 10px 86px;background:#F0F0F0 url(../images/erro.gif) no-repeat;
+}
+
+div.errorStackTrace {
+	border:1px solid #ccc;background:#F0F0F0;margin-top:18px; margin-bottom:18px;
+}
+
+.closeButtonClass {
+	text-align:right; width:1px solid red !important;  margin:-1px 0 0 0;
+}
+
+.buttonClass {
+	border-width: 1px;
+	background-repeat: repeat-x;
+	background-position: top left;
+	border-color: #BED6F8;
+	font-size: 11px;
+	font-family: Arial, Verdana, sans-serif;
+	color: #000;
+	background-color: #BED6F8;
+	background-image: url(../../a4j_3_2_1-SNAPSHOTorg.richfaces.renderkit.html.images.ButtonBackgroundImage/DATB/eAFjYGDg.v.9049r-5gAGcAFgg__.faces);
+}
+
+.inputTextClass {
+	border-width: 1px;
+	border-style: inset;
+	background-repeat: no-repeat;
+	background-position: 1px 1px;
+	border-color: #BED6F8;
+	font-size: 11px;
+	font-family: Arial, Verdana, sans-serif;
+	color: #000;
+	background-color: #fff;
+	background-image: url(../../a4j_3_2_1-SNAPSHOTorg.richfaces.renderkit.html.images.InputBackgroundImage/DATB/eAFjYGDg.vflzf...5kAGqIF6Q__.faces);
+}
+
+.inputTextClassFiltro {
+	border-width: 1px;
+	border-style: inset;
+	background-repeat: no-repeat;
+	background-position: 1px 1px;
+	border-color: #BED6F8;
+	font-size: 11px;
+	font-family: Arial, Verdana, sans-serif;
+	color: #000;
+	background-color: #fff;
+}
+
+.panelInterno {
+	width: 100%;
+}
+
+.painelComum{
+	margin:10px;	
+}
+
+
+.rich-panel-header {
+	border-width: 0px;
+	height: 17px;
+	padding-top: 2px;
+	padding-left: 5px;
+}
+
+/***********************************
+Classe: escondeDiasCalendar
+Funcao: Formatar o texto principal da p·gina.
+***********************************/
+.escondeDiasCalendar tr[id]{
+	display:none; 
+}
+
+.inplace{
+    border: none;
+}
+
+.hover {
+    color: #{a4jSkin.generalTextColor};
+    background-color :#{a4jSkin.tipBorderColor};
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="br.absolut.persistencia.movimento.compra">
+	<class name="Compra" table="compra">
+		<id name="cod" >
+			<generator class="increment" />
+		</id>
+		
+		<property name="dtCompra" column="dt_compra" type="java.util.Date" />
+		<property name="total" />
+		<property name="qtdProduto" column="qtd_produto" />
+		<property name="notaFiscal" column="nota_fiscal" />
+		
+		<many-to-one name="fornecedor" class="br.absolut.persistencia.fornecedor.Fornecedor" column="cod_fornecedor" lazy="false"/>
+		<many-to-one name="usuario" class="br.absolut.persistencia.usuario.Usuario" column="cod_usuario"/>
+		<many-to-one name="pagamento" class="br.absolut.persistencia.movimento.pagamento.Pagamento" column="cod_pgto"/>
+		
+		<bag inverse="true" lazy="false" name="movimentos">
+			<key column="cod_compra" />
+			<one-to-many class="br.absolut.persistencia.movimento.Movimento"/>
+		</bag>
+	</class>
+</hibernate-mapping>

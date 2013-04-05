@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-2.0.xsd"
+	default-lazy-init="true">
+
+	<!-- #########Fonte de dados########## -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/systembe" />
+		<property name="username" value="root" />
+		<property name="password" value="123456" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="10" />
+	</bean>
+	<!-- ################################# -->
+
+	<!-- #######Mapeamento das classes utilizadas pelo Hibernate###### -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath:/model</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.connection.release_mode">auto</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- ############################################################# -->
+
+	<!-- Declaracao de transacoes -->
+	<tx:annotation-driven />
+
+	<!-- Mapeamento das Implementacoes da camada de persistencia -->
+	<bean id="clienteDao" class="br.absolut.persistencia.cliente.DaoClienteImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="acessoDao" class="br.absolut.persistencia.acesso.DaoAcessoImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="fornecedorDao" class="br.absolut.persistencia.fornecedor.DaoFornecedorImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="produtoDao" class="br.absolut.persistencia.produto.DaoProdutoImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="tipoProdutoDao" class="br.absolut.persistencia.produto.DaoTipoProdutoImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="usuarioDao" class="br.absolut.persistencia.usuario.DaoUsuarioImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="compraDao" class="br.absolut.persistencia.movimento.compra.DaoCompraImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="vendaDao" class="br.absolut.persistencia.movimento.venda.DaoVendaImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="pagamentoDao"
+		class="br.absolut.persistencia.movimento.pagamento.DaoPagamentoImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="estoqueDao" class="br.absolut.persistencia.movimento.estoque.DaoEstoqueImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="tipoMovimentoDao" class="br.absolut.persistencia.movimento.DaoTipoMovimentoImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="movimentoDao" class="br.absolut.persistencia.movimento.DaoMovimentoImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="imagemDao" class="br.absolut.persistencia.imagem.DaoImagemImp">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<!-- ####################################################### -->
+
+	<!-- Mapeamento das Implementacoes da camada de negocio -->
+	<bean id="acessoSvn" class="br.absolut.negocio.acesso.SvnAcessoImp">
+		<property name="daoAcesso" ref="acessoDao" />
+	</bean>
+	<bean id="clienteSvn" class="br.absolut.negocio.cliente.SvnClienteImp">
+		<property name="daoCliente" ref="clienteDao" />
+	</bean>
+	<bean id="fornecedorSvn" class="br.absolut.negocio.fornecedor.SvnFornecedorImp">
+		<property name="daoFornecedor" ref="fornecedorDao" />
+	</bean>
+	<bean id="produtoSvn" class="br.absolut.negocio.produto.SvnProdutoImp">
+		<property name="daoProduto" ref="produtoDao" />
+	</bean>
+	<bean id="tipoProdutoSvn" class="br.absolut.negocio.produto.SvnTipoProdutoImp">
+		<property name="daoTipoProduto" ref="tipoProdutoDao" />
+	</bean>
+	<bean id="usuarioSvn" class="br.absolut.negocio.usuario.SvnUsuarioImp">
+		<property name="daoUsuario" ref="usuarioDao" />
+	</bean>
+	<bean id="compraSvn" class="br.absolut.negocio.movimento.compra.SvnCompraImp">
+		<property name="daoCompra" ref="compraDao" />
+	</bean>
+	<bean id="vendaSvn" class="br.absolut.negocio.movimento.venda.SvnVendaImp">
+		<property name="daoVenda" ref="vendaDao" />
+	</bean>
+	<bean id="pagamentoSvn" class="br.absolut.negocio.movimento.pagamento.SvnPagamentoImp">
+		<property name="daoPagamento" ref="pagamentoDao" />
+	</bean>
+	<bean id="estoqueSvn" class="br.absolut.negocio.movimento.estoque.SvnEstoqueImp">
+		<property name="daoEstoque" ref="estoqueDao" />
+	</bean>
+	<bean id="tipoMovimentoSvn" class="br.absolut.negocio.movimento.SvnTipoMovimentoImp">
+		<property name="daoTipoMovimento" ref="tipoMovimentoDao" />
+	</bean>
+	<bean id="movimentoSvn" class="br.absolut.negocio.movimento.SvnMovimentoImp">
+		<property name="daoMovimento" ref="movimentoDao" />
+	</bean>
+	<bean id="imagemSvn" class="br.absolut.negocio.imagem.SvnImagemImp">
+		<property name="daoImagem" ref="imagemDao" />
+	</bean>
+	<!-- ################################################## -->
+
+	<!-- Mapeamento das classes controladoras da camada de apresentacao -->
+	<bean id="usuarioCtl" class="br.absolut.apresentacao.mantemusuario.CtlMantemUsuario">
+		<property name="svnUsuario" ref="usuarioSvn" />
+		<property name="svnAcesso" ref="acessoSvn" />
+	</bean>
+	<bean id="clienteCtl" class="br.absolut.apresentacao.mantemcliente.CtlMantemCliente">
+		<property name="svnCliente" ref="clienteSvn" />
+	</bean>
+	<bean id="produtoCtl" class="br.absolut.apresentacao.mantemproduto.CtlMantemProduto">
+		<property name="svnTipoProduto" ref="tipoProdutoSvn" />
+		<property name="svnProduto" ref="produtoSvn" />
+	</bean>
+	<bean id="fornecedorCtl"
+		class="br.absolut.apresentacao.mantemfornecedor.CtlMantemFornecedor">
+		<property name="svnFornecedor" ref="fornecedorSvn" />
+	</bean>
+	<bean id="vendaCtl" class="br.absolut.apresentacao.venda.CtlVenda">
+		<property name="svnEstoque" ref="estoqueSvn" />
+		<property name="svnMovimento" ref="movimentoSvn" />
+		<property name="svnTipoMovimento" ref="tipoMovimentoSvn" />
+		<property name="svnProduto" ref="produtoSvn" />
+		<property name="svnUsuario" ref="usuarioSvn" />
+		<property name="svnPagamento" ref="pagamentoSvn" />
+		<property name="svnVenda" ref="vendaSvn" />
+		<property name="svnCliente" ref="clienteSvn" />
+	</bean>
+	<bean id="compraCtl" class="br.absolut.apresentacao.compra.CtlCompra">
+		<property name="svnFornecedor" ref="fornecedorSvn" />
+		<property name="svnProduto" ref="produtoSvn" />
+		<property name="svnPagamento" ref="pagamentoSvn" />
+		<property name="svnCompra" ref="compraSvn" />
+		<property name="svnMovimento" ref="movimentoSvn" />
+		<property name="svnTipoMovimento" ref="tipoMovimentoSvn" />
+		<property name="svnUsuario" ref="usuarioSvn" />
+		<property name="svnEstoque" ref="estoqueSvn" />
+	</bean>
+	<bean id="principalCtl" class="br.absolut.apresentacao.principal.CtlPrincipal">
+		<property name="svnVenda" ref="vendaSvn" />
+		<property name="svnProduto" ref="produtoSvn" />
+	</bean>
+	<!-- ############################################################## -->
+
+	<!-- Mapeamento das classes responsáveis por enviar email -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.uol.com.br" />
+		<property name="username" value="" />
+		<property name="password" value="" />
+	</bean>
+
+</beans>

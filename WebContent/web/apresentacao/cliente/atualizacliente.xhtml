@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Atualizar cliente" />
+		</ui:define>
+		<ui:define name="corpo">
+			<f:view>
+			<rich:spacer height="30"/>
+			<h:outputText value="Cadastrar cliente" styleClass="nomeTela" />
+			<h:form id="formCliente">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage value="../../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+				<rich:panel>
+					<f:facet name="header">
+						<h:outputText value="Dados cliente" />
+					</f:facet>
+					<h:panelGrid columns="2" styleClass="tabelaSemLateral" width="99%">
+						<h:outputText value="CPF:" />
+						<h:panelGroup>
+							<h:inputText id="cpf"
+								value="#{actAtualizaCliente.dtoCliente.cpfCnpj}" size="20"
+								maxlength="14" styleClass="campoTexto" required="true"
+								requiredMessage="O CPF &#233; obrigat&#243;rio"
+								onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this, '999.999.999-99', event);"/>
+							<rich:message for="cpf" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Nome:" />
+						<h:panelGroup>
+							<h:inputText id="nome"
+								value="#{actAtualizaCliente.dtoCliente.nome}" size="80"
+								maxlength="100" styleClass="campoTexto" required="true"
+								requiredMessage="O nome é obrigatório" />
+							<rich:message for="nome" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Identidade:" />
+						<h:panelGroup>
+							<h:inputText id="rg"
+								value="#{actAtualizaCliente.dtoCliente.identidade}" size="20"
+								maxlength="20" styleClass="campoTexto" required="true"
+								requiredMessage="A identidade &#233; obrigat&#243;ria"
+								onkeydown="validaDigito(event);" />
+							<rich:message for="rg" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Endere&#231;o:" />
+						<h:inputText value="#{actAtualizaCliente.dtoCliente.endereco}"
+							size="80" maxlength="100" styleClass="campoTexto" />
+						<h:outputText value="Bairro:" />
+						<h:panelGroup>
+							<h:inputText value="#{actAtualizaCliente.dtoCliente.bairro}"
+								size="30" maxlength="50" styleClass="campoTexto" />
+							<h:outputText value=" Cidade: " />
+							<h:inputText value="#{actAtualizaCliente.dtoCliente.cidade}"
+								size="30" maxlength="50" styleClass="campoTexto" />
+						</h:panelGroup>
+						<h:outputText value="Estado:" />
+						<h:panelGroup>
+							<h:selectOneMenu styleClass="combo"
+								value="#{actAtualizaCliente.dtoCliente.estado}">
+								<f:selectItem itemValue="0" itemLabel="-- Escolha --" />
+								<f:selectItems value="#{actAtualizaCliente.listaEstado}" />
+							</h:selectOneMenu>
+							<h:outputText value=" CEP: " />
+							<h:inputText value="#{actAtualizaCliente.dtoCliente.cep}"
+								size="10" maxlength="10" styleClass="campoTexto"
+								onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this, '99.999-999', event);" />
+						</h:panelGroup>
+						<h:outputText value="Telefone:" />
+						<h:panelGroup>
+							<h:inputText value="#{actAtualizaCliente.dtoCliente.telefone}"
+								size="10" maxlength="9" styleClass="campoTexto"
+								onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this, '9999-9999', event);" />
+							<h:outputText value=" Celular: " />
+							<h:inputText value="#{actAtualizaCliente.dtoCliente.celular}"
+								size="10" maxlength="9" styleClass="campoTexto"
+								onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this, '9999-9999', event);" />
+						</h:panelGroup>
+						<f:facet name="footer">
+							<h:panelGroup>
+								<center><h:panelGrid columns="2" styleClass="semBorda">
+									<h:commandButton value="Salvar" styleClass="botoes"
+										action="#{actAtualizaCliente.salvar}"
+										onclick="Richfaces.showModalPanel('mpStatusSubmit');" />
+									<h:commandButton value="Limpar" styleClass="botoes"
+										type="reset" />
+								</h:panelGrid></center>
+							</h:panelGroup>
+						</f:facet>
+					</h:panelGrid>
+				</rich:panel>
+				<h:inputHidden id="codCliente" value="#{actAtualizaCliente.dtoCliente.cod}" />
+				<h:inputHidden id="idDtInclusao" value="#{actAtualizaCliente.dtoCliente.dtInclusao}" />
+			</h:form>
+		</f:view>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

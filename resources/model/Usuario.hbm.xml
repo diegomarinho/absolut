@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="br.absolut.persistencia.usuario">
+	<class name="Usuario" table="usuario">
+		<id name="cod">
+			<generator class="increment" />
+		</id>
+		<property name="nome" />
+		<property name="login" />
+		<property name="senha" />
+		<property name="dtExclusao" column="dt_exclusao" type="java.util.Date" />
+		<many-to-one name="acesso" lazy="false"
+			class="br.absolut.persistencia.acesso.Acesso" column="cod_tipo_acesso" />
+	</class>
+</hibernate-mapping>

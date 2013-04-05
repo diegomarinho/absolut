@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transational//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transational.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j" lang="pt">
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Venda" />
+		</ui:define>
+		<ui:define name="corpo">
+			<rich:spacer height="30" />
+			<h:outputText value="Nova venda" styleClass="nomeTela" />
+			<h:form id="formVenda">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage
+							value="../../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+				<rich:panel>
+					<h:panelGrid columns="2" styleClass="tabelaSemLateral" width="99%">
+						<h:outputText value="Data:" />
+						<rich:calendar value="#{actVenda.dtoVenda.dtPedido}"
+							datePattern="dd/MM/yyyy" firstWeekDay="0"
+							monthLabels="Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro"
+							weekDayLabels="Dom,Seg,Ter,Qua,Qui,Sex,Sab" inputSize="10" />
+						<h:outputText value="Usuário:" />
+						<h:inputText value="#{actVenda.dtoUsuario.nome}" size="70"
+							maxlength="100" styleClass="campoTexto" readonly="true" />
+						<h:outputText value="Cliente:" />
+						<h:panelGroup id="pGroupCliente">
+							<h:inputText value="#{actVenda.dtoVenda.cpfCliente}" size="14"
+								maxlength="14" styleClass="campoTexto"
+								onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this, '999.999.999-99', event);">
+								<a4j:support event="onblur" ajaxSingle="true"
+									actionListener="#{actVenda.recuperaClientePorCpf}"
+									reRender="pGroupCliente" />
+							</h:inputText>
+							<h:inputText value="#{actVenda.dtoVenda.nomeCliente}" size="70"
+								maxlength="100" styleClass="campoTexto" readonly="true" />
+							<a4j:commandButton id="btPesquisaCliente" value="Procurar"
+								onclick="document.location.href='/absolut/web/apresentacao/cliente/consultacliente.faces'" />
+						</h:panelGroup>
+					</h:panelGrid>
+					<rich:panel>
+						<f:facet name="header">
+							<h:panelGroup>
+								<h:outputText value="Itens" />
+								<rich:spacer width="650" />
+								<a4j:commandLink id="bTAddItem" value="Adicionar">
+									<rich:componentControl for="mpAddItem" attachTo="bTAddItem"
+										operation="show" event="onclick" />
+								</a4j:commandLink>
+							</h:panelGroup>
+						</f:facet>
+						<rich:dataTable id="resultadoConsultaProduto" rows="5"
+							value="#{actVenda.listaItemAdicionado}" var="item" width="100%"
+							onRowMouseOver="this.style.backgroundColor='#FFF7D6'"
+							onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'">
+							<rich:column id="item_check" align="center">
+								<f:facet name="header">
+									<h:selectBooleanCheckbox
+										onclick="marcaTodasLinhasTabelaJsf(this)" id="marcacaoTodos" />
+								</f:facet>
+								<h:selectBooleanCheckbox value="#{item.selecionado}"
+									id="chkProduto" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Descrição" />
+								</f:facet>
+								<h:outputText value="#{item.descricao}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Fabricante" />
+								</f:facet>
+								<h:outputText value="#{item.fabricante}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Tipo" />
+								</f:facet>
+								<h:outputText value="#{item.descrTipo}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Valor unitário" />
+								</f:facet>
+								<h:outputText value="#{item.valVenda}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Quantidade" />
+								</f:facet>
+								<h:outputText value="#{item.quantidade}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Valor total" />
+								</f:facet>
+								<h:outputText value="#{item.total}" />
+							</rich:column>
+							<f:facet name="footer">
+								<rich:datascroller id="scroll" for="resultadoConsultaProduto"
+									maxPages="10" align="center" page="" renderIfSinglePage="false" />
+							</f:facet>
+						</rich:dataTable>
+						<h:panelGrid columns="3">
+							<h:panelGroup>
+								<h:commandButton id="btExcluiItem" value="Excluir"
+									action="#{actVenda.excluiItem}" disabled="#{actVenda.listaItensVazia}" />
+								<rich:spacer width="320" />
+							</h:panelGroup>
+							<h:panelGrid columns="2">
+								<h:outputText value="Quantidade produtos:"
+									style="font-weight:bold" />
+								<h:inputText value="#{actVenda.dtoVenda.qtdProdutos}" size="10"
+									styleClass="campoTexto" readonly="true" />
+							</h:panelGrid>
+							<h:panelGrid columns="2">
+								<h:outputText value="Total geral:" style="font-weight:bold" />
+								<h:inputText value="#{actVenda.dtoVenda.subTotal}" size="10"
+									styleClass="campoTexto" readonly="true" />
+							</h:panelGrid>
+						</h:panelGrid>
+					</rich:panel>
+					<center>
+						<h:panelGrid columns="2" rendered="#{!actVenda.novaVenda}">
+							<a4j:commandButton id="btFinalizaVenda" value="Finalizar"
+								styleClass="botoes">
+								<rich:componentControl for="mpFinalizaVenda"
+									attachTo="btFinalizaVenda" operation="show" event="onclick" />
+							</a4j:commandButton>
+							<h:commandButton value="Cancelar" styleClass="botoes"
+								action="#{actVenda.cancelar}" />
+						</h:panelGrid>
+						<h:panelGrid columns="2" rendered="#{actVenda.novaVenda}">
+							<h:commandButton value="Nova Venda" styleClass="botoes"
+								action="#{actVenda.nova}" />
+							<h:commandButton value="Imprimir" styleClass="botoes"
+								action="#{actVenda.gerarRelatorioVendaImpressao}" />
+						</h:panelGrid>
+					</center>
+				</rich:panel>
+				<rich:modalPanel id="mpAddItem" autosized="true" moveable="true"
+					width="600">
+					<f:facet name="header">
+						<h:outputText value="Adicionar item" />
+					</f:facet>
+					<rich:messages id="modalMessages" globalOnly="true"
+						errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+						<f:facet name="errorMarker">
+							<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+						</f:facet>
+						<f:facet name="infoMarker">
+							<h:graphicImage
+								value="../../../common/image/imgIconeConfirmacao.gif" />
+						</f:facet>
+						<f:facet name="warnMarker">
+							<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+						</f:facet>
+					</rich:messages>
+					<h:panelGrid id="pGridItem" columns="2" styleClass="tabela"
+						width="100%">
+						<h:outputText value="Descrição:" />
+						<h:selectOneMenu id="descricao"
+							value="#{actVenda.dtoItem.codItem}">
+							<f:selectItem itemValue="" itemLabel="-- Escolha --" />
+							<f:selectItems value="#{actVenda.listaProduto}" />
+							<a4j:support event="onchange" ajaxSingle="true"
+								action="#{actVenda.recuperaProdutoPorId}" reRender="pGridItem"
+								focus="quantidade" />
+						</h:selectOneMenu>
+						<h:outputText value="Código barras:" />
+						<h:inputText id="barra" value="#{actVenda.dtoItem.codBarra}"
+							size="13" maxlength="20" styleClass="campoTexto" readonly="true" />
+						<h:outputText value="Tipo:" />
+						<h:panelGroup>
+							<h:inputText value="#{actVenda.dtoItem.descrTipo}" size="30"
+								maxlength="100" styleClass="campoTexto" readonly="true" />
+							<rich:spacer width="50" />
+							<h:outputText value="Fabricante:" />
+							<rich:spacer width="10" />
+							<h:inputText value="#{actVenda.dtoItem.fabricante}" size="30"
+								maxlength="50" styleClass="campoTexto" readonly="true" />
+						</h:panelGroup>
+						<h:outputText value="Preço unitário:" />
+						<h:panelGroup>
+							<h:inputText id="valUnit" value="#{actVenda.dtoItem.valVenda}"
+								size="10" maxlength="10" styleClass="campoTexto" readonly="true" />
+							<rich:spacer width="50" />
+							<h:outputText value="Quantidade" />
+							<rich:spacer width="10" />
+							<h:inputText id="quantidade"
+								value="#{actVenda.dtoItem.quantidade}" size="10" maxlength="10"
+								styleClass="campoTexto" onkeydown="validaDigito(event);">
+								<a4j:support event="onblur" ajaxSingle="true"
+									action="#{actVenda.calculaValorTotalItem}" reRender="total"
+									focus="bTAdicionar" />
+							</h:inputText>
+						</h:panelGroup>
+						<h:outputText value="Valor total:" />
+						<h:panelGroup>
+							<h:inputText id="total" value="#{actVenda.dtoItem.total}"
+								size="10" maxlength="10" styleClass="campoTexto" readonly="true" />
+							<rich:spacer width="250" />
+							<h:outputText value="Estoque:" style="font-weight:bold;" />
+							<rich:spacer width="10" />
+							<h:inputText value="#{actVenda.dtoItem.estoque}" size="5"
+								maxlength="5" styleClass="campoTexto"
+								style="font-weight:bold;#{actVenda.styleEstoque}"
+								readonly="true" />
+						</h:panelGroup>
+						<f:facet name="footer">
+							<h:panelGroup>
+								<center>
+									<h:commandButton id="bTAdicionar" value="Adicionar"
+										action="#{actVenda.adicionaItem}"
+										onclick="javascript: Richfaces.hideModalPanel('mpAddItem');"
+										disabled="#{actVenda.podeAddItem}" />
+									<h:commandButton value="Voltar"
+										onclick="javascript: Richfaces.hideModalPanel('mpAddItem');return false;" />
+								</center>
+							</h:panelGroup>
+						</f:facet>
+					</h:panelGrid>
+				</rich:modalPanel>
+				<rich:modalPanel id="mpFinalizaVenda" autosized="true"
+					moveable="true" width="400">
+					<f:facet name="header">
+						<h:outputText value="Finaliza venda" />
+					</f:facet>
+					<h:panelGrid columns="2" styleClass="tabela" width="100%">
+						<h:outputText value="Sub-total:" />
+						<h:inputText value="#{actVenda.dtoVenda.subTotal}" size="10"
+							maxlength="10" styleClass="campoTexto" readonly="true" />
+						<h:outputText value="Forma pagamento:" />
+						<h:selectOneMenu value="#{actVenda.dtoVenda.codPagamento}">
+							<f:selectItem itemValue="0" itemLabel="-- Escolha --" />
+							<f:selectItems value="#{actVenda.listaTipoPagamento}" />
+						</h:selectOneMenu>
+						<h:outputText value="Desconto:" />
+						<h:panelGroup>
+							<h:inputText value="#{actVenda.dtoVenda.desconto}" size="5"
+								maxlength="5" styleClass="campoTexto">
+								<a4j:support event="onblur" ajaxSingle="true"
+									action="#{actVenda.calculaDesconto}" reRender="totalFinal" />
+							</h:inputText>
+							<rich:spacer width="2" />
+							<h:outputText value="%" />
+						</h:panelGroup>
+						<h:outputText value="Total:" style="font-weight:bold;" />
+						<h:inputText id="totalFinal" value="#{actVenda.dtoVenda.total}"
+							size="10" maxlength="10" styleClass="campoTexto" readonly="true" />
+					</h:panelGrid>
+					<center>
+						<h:commandButton value="Salvar" action="#{actVenda.salvar}"
+							onclick="javascript: Richfaces.hideModalPanel('mpFinalizaVenda');Richfaces.showModalPanel('mpStatusSubmit');" />
+						<rich:spacer width="5" />
+						<h:commandButton value="Cancelar"
+							onclick="javascript: Richfaces.hideModalPanel('mpFinalizaVenda');return false;" />
+					</center>
+				</rich:modalPanel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

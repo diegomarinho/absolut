@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Atualiza produto" />
+		</ui:define>
+		<ui:define name="corpo">
+			<rich:spacer height="30" />
+			<h:outputText value="Cadastrar produto" styleClass="nomeTela" />
+			<h:form id="formProduto">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage
+							value="../../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+				<rich:panel>
+					<f:facet name="header">
+						<h:outputText value="Dados produto" />
+					</f:facet>
+					<h:panelGrid columns="2" styleClass="tabelaSemLateral" width="99%">
+						<h:outputText value="Código de barras:" />
+						<h:panelGroup>
+							<h:inputText id="barra"
+								value="#{actAtualizaProduto.dtoProduto.codBarra}" size="20"
+								maxlength="13" styleClass="campoTexto" required="true"
+								requiredMessage="O Código de barras é obrigatório"
+								onkeydown="validaDigito(event);" />
+							<rich:message for="barra" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Descrição:" />
+						<h:panelGroup>
+							<h:inputTextarea id="descricao"
+								value="#{actAtualizaProduto.dtoProduto.descricao}"
+								styleClass="campoTexto" required="true"
+								requiredMessage="A descrição é obrigatória"
+								style="width: 450px;height: 50px" />
+							<rich:message for="descricao" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Fabricante:" />
+						<h:inputText value="#{actAtualizaProduto.dtoProduto.fabricante}"
+							size="20" maxlength="50" styleClass="campoTexto" />
+						<h:outputText value=" Tipo produto: " />
+						<h:panelGroup>
+							<h:selectOneMenu styleClass="combo" id="tipoProduto"
+								value="#{actAtualizaProduto.dtoProduto.codTipoProduto}"
+								required="true"
+								requiredMessage="O tipo do produto é obrigatório">
+								<f:selectItem itemValue="" itemLabel="-- Escolha --" />
+								<f:selectItems value="#{actAtualizaProduto.listaTipoProduto}" />
+							</h:selectOneMenu>
+							<rich:message for="tipoProduto" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Valor de compra:" />
+						<h:panelGroup>
+							<h:inputText id="valUnitario"
+								value="#{actAtualizaProduto.dtoProduto.valorCompra}" size="10"
+								maxlength="10" styleClass="campoTexto" required="true"
+								requiredMessage="O Valor unitário é obrigatório"
+								onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this,'999.999,99',event);" />
+							<rich:message for="valUnitario" style="color:red" />
+							<rich:spacer width="30" />
+							<h:outputText value="Valor de venda:" />
+							<h:inputText value="#{actAtualizaProduto.dtoProduto.valorVenda}"
+								size="10" maxlength="10" styleClass="campoTexto"
+								onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this,'999.999,99',event);" />
+						</h:panelGroup>
+						<h:outputText value=" Quantidade:   " />
+						<h:inputText value="#{actAtualizaProduto.dtoProduto.saldoAtual}"
+							size="10" maxlength="10" styleClass="campoTexto"
+							onkeydown="validaDigito(event);" />
+						<h:outputText value="Imagem produto:" rendered="false" />
+						<h:panelGroup id="pGroupUpload" rendered="false">
+							<rich:fileUpload
+								fileUploadListener="#{actAtualizaProduto.listener}"
+								maxFilesQuantity="1" id="upload" immediateUpload="true"
+								acceptedTypes="jpg,gif,png,bmp" allowFlash="true"
+								addControlLabel="Adicionar" cancelEntryControlLabel="Cancelar"
+								clearControlLabel="Remover" clearAllControlLabel="Remover todos"
+								doneLabel="Adicionado" progressLabel="Carregando"
+								sizeErrorLabel="O tamanho do arquivo excede o permitido"
+								stopControlLabel="Cancelar" stopEntryControlLabel="Cancelar"
+								transferErrorLabel="Ocorreu um erro ao transferir o arquivo"
+								uploadControlLabel="Upload" listHeight="50">
+							</rich:fileUpload>
+						</h:panelGroup>
+						<f:facet name="footer">
+							<h:panelGroup>
+								<center>
+									<h:panelGrid columns="2" styleClass="semBorda">
+										<h:commandButton value="Salvar" styleClass="botoes"
+											action="#{actAtualizaProduto.salvar}"
+											onclick="Richfaces.showModalPanel('mpStatusSubmit');" />
+										<h:commandButton value="Limpar" styleClass="botoes"
+											type="reset" />
+									</h:panelGrid>
+								</center>
+							</h:panelGroup>
+						</f:facet>
+					</h:panelGrid>
+				</rich:panel>
+				<h:inputHidden id="codProduto"
+					value="#{actAtualizaProduto.dtoProduto.cod}" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+<head>
+<link type="text/css" rel="stylesheet"
+	href="/absolut/common/css/divs.css" />
+<link type="text/css" rel="stylesheet"
+	href="/absolut/common/css/estilo.css" />
+<script type="text/javascript" src="/absolut/common/script/funcoes.js"></script>
+
+<title><ui:insert name="titulo"></ui:insert></title>
+</head>
+<body background="/absolut/common/image/background.jpg">
+	<div id="tudo">
+		<div id="cabecalho">
+
+			<div
+				style="position: absolute; top: 40px; left: 20px; color: white; font-size: 25pt; font-family: monospace;">
+				<table>
+					<tr>
+						<td><h:graphicImage value="/common/image/imagem3.png" /></td>
+						<td>Absolut Stock</td>
+					</tr>
+				</table>
+			</div>
+
+			<f:view>
+				<h:form>
+					<div id="userLogon">
+						<h:panelGroup id="pGroupUserLogado"
+							rendered="#{actPrincipal.dtoUsuario != null}">
+							<h:outputText value="Ol&#225;, #{actPrincipal.dtoUsuario.nome}" />
+							<br />
+							<rich:spacer width="5" />
+
+							<h:commandLink value=""
+								style="text-size:10px; text-decoration:none;"
+								onclick="#{rich:component('confirmation')}.show();return false">
+								<h:graphicImage value="/common/image/close.gif" />
+							</h:commandLink>
+						</h:panelGroup>
+					</div>
+					<rich:modalPanel id="confirmation" width="250" height="150">
+						<f:facet name="header">Confirmação</f:facet>
+						<h:panelGrid>
+							<h:panelGrid columns="2">
+								<h:graphicImage value="/common/image/close.gif" />
+								<h:outputText value="Deseja sair?" style="FONT-SIZE: large;" />
+							</h:panelGrid>
+
+							<rich:spacer width="5" />
+
+							<h:panelGrid columns="2">
+								<h:commandButton value="OK" action="#{actLogin.efetuaLogout}"
+									onclick="#{rich:component('confirmation')}.hide();submit();return false" />
+								<h:commandButton value="Cancelar"
+									onclick="#{rich:component('confirmation')}.hide();return false" />
+							</h:panelGrid>
+						</h:panelGrid>
+					</rich:modalPanel>
+				</h:form>
+			</f:view>
+			<ui:insert name="cabecalho" />
+		</div>
+		<div id="menu">
+			<ui:insert name="menu">
+				<a4j:include viewId="../../web/apresentacao/menu/menu.xhtml" />
+			</ui:insert>
+		</div>
+		<div id="corpo">
+			<ui:insert name="corpo">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage value="../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+			</ui:insert>
+		</div>
+		<div id="rodape">
+			<ui:insert name="rodape" />
+		</div>
+	</div>
+	<rich:modalPanel id="mpStatusSubmit" minHeight="80" minWidth="300"
+		height="55" width="300" zindex="100">
+		<f:facet name="header">
+			<h:outputText value="Requisição: Status do Processamento" />
+		</f:facet>
+		<div class="status">
+			<h:panelGroup>
+				<h:graphicImage value="/common/image/spinner.gif" />
+				<strong><h:outputText
+						value="Por favor, aguarde. Processando..." /></strong>
+				<f:verbatim>&amp;nbsp;</f:verbatim>
+			</h:panelGroup>
+		</div>
+	</rich:modalPanel>
+</body>
+</html>

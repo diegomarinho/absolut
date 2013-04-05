@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="br.absolut.persistencia.movimento.estoque">
+	<class name="Estoque" table="estoque">
+		<id name="cod" >
+			<generator class="increment" />
+		</id>
+		
+		<property name="qtdSaldo" column="qtd_saldo" />
+				
+		<many-to-one name="movimento" class="br.absolut.persistencia.movimento.Movimento" column="cod_movimento"/>		
+	</class>
+</hibernate-mapping>

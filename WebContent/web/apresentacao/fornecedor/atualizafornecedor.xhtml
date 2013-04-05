@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Atualiza fornecedor" />
+		</ui:define>
+		<ui:define name="corpo">
+			<rich:spacer height="30"/>
+			<h:outputText value="Cadastrar fornecedor" styleClass="nomeTela" />
+			<h:form id="formFornecedor">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage value="../../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+				<rich:panel>
+					<f:facet name="header">
+						<h:outputText value="Dados fornecedor" />
+					</f:facet>
+					<h:panelGrid columns="2" styleClass="tabelaSemLateral" width="99%">
+						<h:outputText value="CNPJ:" />
+						<h:panelGroup>
+							<h:inputText id="cnpj"
+								value="#{actAtualizaFornecedor.dtoFornecedor.cnpj}" size="20"
+								maxlength="18" styleClass="campoTexto" required="true"
+								requiredMessage="O CNPJ é obrigatório"
+								onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this, '99.999.999/9999-99', event);" />
+							<rich:message for="cnpj" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Nome:" />
+						<h:panelGroup>
+							<h:inputText id="nome"
+								value="#{actAtualizaFornecedor.dtoFornecedor.nome}" size="80"
+								maxlength="100" styleClass="campoTexto" required="true"
+								requiredMessage="O nome é obrigatório" />
+							<rich:message for="nome" style="color:red" />
+						</h:panelGroup>
+						<h:outputText value="Telefone:" />
+						<h:inputText
+							value="#{actAtualizaFornecedor.dtoFornecedor.telefone}" size="10"
+							maxlength="9" styleClass="campoTexto"
+							onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this, '9999-9999', event);" />
+						<h:outputText value="Endereço:" />
+						<h:inputText value="#{actAtualizaFornecedor.dtoFornecedor.endereco}" size="75"
+							maxlength="100" styleClass="campoTexto" />
+						<h:outputText value="Bairro:" />
+						<h:panelGroup>
+							<h:inputText value="#{actAtualizaFornecedor.dtoFornecedor.bairro}"
+								size="30" maxlength="50" styleClass="campoTexto" />
+							<h:outputText value=" Cidade: " />
+							<h:inputText value="#{actAtualizaFornecedor.dtoFornecedor.cidade}"
+								size="30" maxlength="50" styleClass="campoTexto" />
+						</h:panelGroup>
+						<h:outputText value="Estado:" />
+						<h:panelGroup>
+							<h:selectOneMenu styleClass="combo"
+								value="#{actAtualizaFornecedor.dtoFornecedor.estado}">
+								<f:selectItem itemValue="0" itemLabel="-- Escolha --" />
+								<f:selectItems value="#{actAtualizaCliente.listaEstado}" />
+							</h:selectOneMenu>
+							<h:outputText value=" CEP: " />
+							<h:inputText value="#{actAtualizaFornecedor.dtoFornecedor.cep}"
+								size="10" maxlength="10" styleClass="campoTexto"
+								onkeydown="validaDigito(event);formataQualquerTipoMascaraDireita(this,'99.999-999', event);" />
+						</h:panelGroup>
+						<h:panelGroup>
+						<h:outputText value="Dados bancários" style="font-weight:bold;"/><br/>
+						<rich:spacer height="20"/>
+						<h:outputText value="Agencia:" />
+						</h:panelGroup>
+						<h:panelGroup>
+							<rich:spacer height="30"/>
+							<h:inputText value="#{actAtualizaFornecedor.dtoFornecedor.agencia}"
+								size="10" maxlength="20" styleClass="campoTexto" />
+							<rich:spacer width="20"/>
+							<h:outputText value="Conta corrente:"/>
+							<rich:spacer width="10"/>
+							<h:inputText value="#{actAtualizaFornecedor.dtoFornecedor.contaCorrente}"
+								size="20" maxlength="20" styleClass="campoTexto" />
+						</h:panelGroup>
+							<h:outputText value="Banco:"/>
+							<h:inputText value="#{actAtualizaFornecedor.dtoFornecedor.banco}"
+								size="40" maxlength="50" styleClass="campoTexto" />
+						<f:facet name="footer">
+							<h:panelGroup>
+								<center><h:panelGrid columns="2" styleClass="semBorda">
+									<h:commandButton value="Salvar" styleClass="botoes"
+										action="#{actAtualizaFornecedor.salvar}"
+										onclick="Richfaces.showModalPanel('mpStatusSubmit');" />
+									<h:commandButton value="Limpar" styleClass="botoes"
+										type="reset" />
+								</h:panelGrid></center>
+							</h:panelGroup>
+						</f:facet>
+					</h:panelGrid>
+				</rich:panel>
+				<h:inputHidden id="codFornecedor"
+					value="#{actAtualizaFornecedor.dtoFornecedor.cod}" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

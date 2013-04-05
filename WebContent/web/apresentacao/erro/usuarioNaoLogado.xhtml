@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layoutErro.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Erro na p&#225;gina" />
+		</ui:define>
+		<ui:define name="corpo">
+			<h:form id="formUsuarioNaoLogado">
+				<h:outputText value="Usu&#225;rio n&#227;o logado!!" styleClass="nomeTelaErro" />
+				<br />
+				<br />
+				<br />
+				<h:panelGrid columns="2" width="50%" styleClass="tabelaSemBorda"
+					border="0" cellpadding="0" cellspacing="0">
+					<h:graphicImage url="../../../common/image/imgNegado.jpg" />
+					<h:panelGroup>
+						<h:outputText
+							value="Voc&#234; n&#227;o est&#225; logado no sistema ou sua sess‹&#227;o expirou. Para fazer o login, clique em 'Logar'." />
+						<f:verbatim>
+							<br />
+						</f:verbatim>
+						<h:panelGrid columns="1">
+							<h:commandButton value="Logar" styleClass="botoesGrandes"
+								style="text-align:right;" action="login" />
+						</h:panelGrid>
+					</h:panelGroup>
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

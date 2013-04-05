@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relVendasPorPeriodo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="imgCaminho" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subCaminho" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="dtFinal" class="java.lang.String">
+		<fieldDescription><![CDATA[dtFinal]]></fieldDescription>
+	</field>
+	<field name="dtInicial" class="java.lang.String">
+		<fieldDescription><![CDATA[dtInicial]]></fieldDescription>
+	</field>
+	<field name="listaItem" class="java.util.List">
+		<fieldDescription><![CDATA[listaItem]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.String">
+		<fieldDescription><![CDATA[total]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="95" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText" x="171" y="66" width="100" height="16"/>
+				<textElement/>
+				<text><![CDATA[Valparaíso II]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="120" y="2" width="424" height="29"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[ABSOLUT - Conservadora e Distribuidora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="120" y="31" width="162" height="20"/>
+				<textElement/>
+				<text><![CDATA[CNPJ: 12.390.000/0001-24]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line" x="0" y="94" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement key="line" x="0" y="0" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText" x="120" y="51" width="179" height="15"/>
+				<textElement/>
+				<text><![CDATA[Endereço: Quadra 01 Lote 01 Loja 02]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line" x="555" y="1" width="1" height="94"/>
+			</line>
+			<line>
+				<reportElement key="line" x="0" y="0" width="1" height="94"/>
+			</line>
+			<image>
+				<reportElement key="image" x="2" y="2" width="101" height="91"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{imgCaminho} + "icone.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement key="staticText" x="413" y="57" width="137" height="16"/>
+				<textElement/>
+				<text><![CDATA[Celular(es): (61) 8221-5545]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="468" y="73" width="83" height="16"/>
+				<textElement/>
+				<text><![CDATA[(61) 8448-7292]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="422" y="43" width="132" height="15"/>
+				<textElement/>
+				<text><![CDATA[Telefone: (61) 3629-4318]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="77" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText" x="109" y="12" width="336" height="34"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Relatório de compras por período]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="1" y="57" width="51" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="121" y="57" width="5" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[a]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="52" y="57" width="78" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dtInicial}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="131" y="57" width="78" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dtFinal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement key="rectangle" x="0" y="9" width="555" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText" x="2" y="9" width="50" height="20"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="52" y="9" width="69" height="20"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="357" y="9" width="98" height="20"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUANTIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="455" y="9" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" x="117" y="9" width="240" height="20"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORNECEDOR]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreport" stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="29"/>
+				<dataSourceExpression><![CDATA[new JRBeanCollectionDataSource($F{listaItem})]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{subCaminho} + "subRelComprasPorPeriodo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText" x="396" y="4" width="74" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total geral:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="470" y="4" width="81" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

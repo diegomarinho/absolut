@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layoutLogin.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Entrar no sistema" />
+		</ui:define>
+		<ui:define name="login">
+			<h:form>
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+				</rich:messages>
+				<h:panelGrid styleClass="tabelaSemBorda" columns="2">
+					<h:outputText value="Login:" styleClass="nomeCampo" />
+					<h:panelGroup>
+						<h:inputText id="login" value="#{actLogin.login}" size="30"
+							styleClass="campoTexto" required="true"
+							requiredMessage="Preencha o Login" />
+						<br />
+						<rich:message for="login" style="color:red" />
+					</h:panelGroup>
+					<h:outputText value="Senha:" styleClass="nomeCampo" />
+					<h:panelGroup>
+						<h:inputSecret id="senha" value="#{actLogin.senha}" size="30"
+							styleClass="campoTexto" required="true"
+							requiredMessage="Preencha a senha" />
+						<br />
+						<rich:message for="senha" style="color:red" />
+					</h:panelGroup>
+				</h:panelGrid>
+				<h:panelGrid columns="2" style="align:center;">
+					<a4j:commandButton value="Entrar" type="submit"
+						action="#{actLogin.efetuaLogin}" styleClass="botoes" />
+					<a4j:commandButton value="Limpar" type="reset" styleClass="botoes" />
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>

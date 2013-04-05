@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<ui:composition template="../../../common/template/layout.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="Absolut - Consultar produto" />
+		</ui:define>
+		<ui:define name="corpo">
+			<rich:spacer height="30" />
+			<h:outputText value="Consultar produtos" styleClass="nomeTela" />
+			<h:form id="formProduto">
+				<rich:messages id="globalMessages" globalOnly="true"
+					errorClass="msgError" warnClass="msgWarn" infoClass="msgInfo">
+					<f:facet name="errorMarker">
+						<h:graphicImage value="../../../common/image/imgIconeErro.gif" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage
+							value="../../../common/image/imgIconeConfirmacao.gif" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage value="../../../common/image/imgIconeAtencao.gif" />
+					</f:facet>
+				</rich:messages>
+				<rich:panel header="Dados pesquisa" style="width:98%;">
+					<h:panelGrid columns="2" styleClass="tabela" width="99%">
+						<h:outputText value="Código de barras:" />
+						<h:inputText value="#{actConsultaProduto.dtoConsulta.codBarra}"
+							size="20" maxlength="13" styleClass="campoTexto"
+							onkeydown="validaDigito(event);" />
+						<h:outputText value="Descrição:" />
+						<h:inputTextarea id="descricao"
+							value="#{actConsultaProduto.dtoConsulta.descricao}"
+							styleClass="campoTexto" style="width: 450px;height: 50px" />
+						<h:outputText value="Tipo produto:" />
+						<h:selectOneMenu styleClass="combo" id="tipoProduto"
+							value="#{actConsultaProduto.dtoConsulta.codTipoProduto}">
+							<f:selectItem itemValue="" itemLabel="-- Escolha --" />
+							<f:selectItems value="#{actConsultaProduto.listaTipoProduto}" />
+						</h:selectOneMenu>
+						<h:outputText value="Fabricante" />
+						<h:inputText value="#{actConsultaProduto.dtoConsulta.fabricante}"
+							size="30" maxlength="50" styleClass="campoTexto" />
+						<f:facet name="footer">
+							<h:panelGroup style="semBorda">
+								<center>
+									<h:commandButton value="Consultar"
+										action="#{actConsultaProduto.consultar}"
+										onclick="Richfaces.showModalPanel('mpStatusSubmit');"
+										styleClass="botoes" />
+									<h:commandButton value="Limpar" styleClass="botoes"
+										type="reset" />
+								</center>
+							</h:panelGroup>
+						</f:facet>
+					</h:panelGrid>
+				</rich:panel>
+				<rich:panel header="Resultado consulta" style="width:98%"
+					rendered="#{actConsultaProduto.seMostraResultado}">
+					<rich:dataTable id="resultadoConsultaProduto" rows="5"
+						value="#{actConsultaProduto.listaResultado}" var="item"
+						width="100%" onRowMouseOver="this.style.backgroundColor='#FFF7D6'"
+						onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'">
+
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Código barras" />
+							</f:facet>
+							<h:outputText value="#{item.codBarras}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Descrição" />
+							</f:facet>
+							<h:outputText value="#{item.descricao}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Fabricante" />
+							</f:facet>
+							<h:outputText value="#{item.fabricante}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Tipo" />
+							</f:facet>
+							<h:outputText value="#{item.tipoProduto}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Valor compra" />
+							</f:facet>
+							<h:outputText value="#{item.valorCompra}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Valor venda" />
+							</f:facet>
+							<h:outputText value="#{item.valorVenda}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Quantidade" />
+							</f:facet>
+							<h:outputText value="#{item.saldoAtual}" />
+						</rich:column>
+						<rich:column rendered="false">
+							<f:facet name="header">
+								<h:outputText value="Imagem" />
+							</f:facet>
+							<h:graphicImage value="#{item.urlImagem}"
+								style="width:60px;height:60px;" title="#{item.urlImagem}" />
+						</rich:column>
+						<rich:column align="center">
+							<h:commandLink action="#{actConsultaProduto.alterar}">
+								<f:setPropertyActionListener value="#{item.cod}"
+									target="#{actConsultaProduto.codProduto}" />
+								<h:graphicImage
+									value="../../../common/image/imgBotaoAlterar.gif"
+									title="Alterar produto" />
+							</h:commandLink>
+						</rich:column>
+						<rich:column align="center">
+							<a4j:commandLink id="cLExcluir">
+								<rich:componentControl for="mpConfirmaExclusao"
+									attachTo="cLExcluir" operation="show" event="onclick" />
+								<f:setPropertyActionListener value="#{item.cod}"
+									target="#{actConsultaProduto.codProduto}" />
+								<h:graphicImage
+									value="../../../common/image/imgBotaoExcluir.gif"
+									title="Excluir produto" />
+							</a4j:commandLink>
+						</rich:column>
+						<f:facet name="footer">
+							<rich:datascroller id="scroll" for="resultadoConsultaProduto"
+								maxPages="10" align="center"
+								page="#{actConsultaProduto.scrollerPage}"
+								renderIfSinglePage="false" />
+						</f:facet>
+					</rich:dataTable>
+				</rich:panel>
+				<rich:modalPanel id="mpConfirmaExclusao" autosized="true"
+					moveable="true" width="300">
+					<f:facet name="header">
+						<h:outputText value="Confirmar exclusão" />
+					</f:facet>
+					<center>
+						<h:outputText value="Confirma exclusão do produto?"
+							style="font-weight:bold;" />
+					</center>
+					<br />
+					<center>
+						<h:commandButton value="Sim"
+							onclick="javascript: Richfaces.hideModalPanel('mpConfirmaExclusao');"
+							actionListener="#{actConsultaProduto.excluir}"
+							action="#{actConsultaProduto.atualizaResultado}" />
+						<h:commandButton value="Não"
+							onclick="javascript: Richfaces.hideModalPanel('mpConfirmaExclusao');return false;" />
+					</center>
+				</rich:modalPanel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</ui:composition>
